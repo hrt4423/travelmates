@@ -1,9 +1,9 @@
-//import './index.css';
+import './index.css';
 import liff from '@line/liff'
 
-// element = document.getElementById("liff-message");
-// //liff-message の場所に "Hello, LIFF!" を表示
-// element.innerHTML = "Hello, LIFF!";
+element = document.getElementById("liff-message");
+//liff-message の場所に "Hello, LIFF!" を表示
+element.innerHTML = "Hello, LIFF!";
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -22,6 +22,10 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log(liff.getLanguage());
         console.log(liff.getOS());
         console.log(liff.getVersion());
+
+        element = document.getElementById("liff-message");
+        //liff-message の場所に "Hello, LIFF!" を表示
+        element.innerHTML = "Hello, LIFF!";
     })
     .catch((error) => {
         console.log(error)
