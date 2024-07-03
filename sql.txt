@@ -1,0 +1,56 @@
+CREATE DATABASE travelmate;
+
+-- 旅行テーブル
+CREATE TABLE travelmate.travel (
+    travel_id INT NOT NULL AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    image_path VARCHAR(255) NOT NULL DEFAULT './assets/travel_image/default.png',
+    management_id INT NOT NULL,
+    start_datetime DATETIME,
+    end_datetime DATETIME,
+    PRIMARY KEY (travel_id),
+    FOREIGN KEY (management_id) REFERENCES travelmate.user(user_id)
+);
+
+-- 移動手段テーブル
+CREATE TABLE travelmate.transport (
+    transport_id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    PRIMARY KEY (transport_id)
+);
+
+-- ユーザーテーブル
+CREATE TABLE travelmate.user (
+    user_id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    icon_path VARCHAR(255) NOT NULL DEFAULT './assets/user_icon/default.png',
+    PRIMARY KEY (user_id)
+);
+
+-- イベントテーブル
+CREATE TABLE travelmate.event (
+    event_id INT NOT NULL AUTO_INCREMENT,
+    route_id INT NOT NULL,
+    travel_id INT NOT NULL,
+    is_transport BOOLEAN NOT NULL,
+    charge INT NOT NULL DEFAULT 0,
+    start_datetime DATETIME NOT NULL,
+    end_datetime DATETIME NOT NULL,
+    transport_id INT NOT NULL,
+    place VARCHAR(255),
+    event_detail VARCHAR(255),
+    PRIMARY KEY (event_id),
+    FOREIGN KEY (travel_id) REFERENCES travelmate.travel(travel_id),
+    FOREIGN KEY (transport_id) REFERENCES travelmate.transport(transport_id)
+);
+
+-- メンバーテーブル
+CREATE TABLE travelmate.member (
+    travel_id INT NOT NULL,
+    user_id INT NOT NULL,
+    PRIMARY KEY (travel_id, user_id),
+    FOREIGN KEY (travel_id) REFERENCES travelmate.travel(travel_id),
+    FOREIGN KEY (user_id) REFERENCES travelmate.user(user_id)
+);
