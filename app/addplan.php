@@ -30,6 +30,6 @@
         </div>
     </div>
 
-    <script src="../app/script.js"></script>
+    <script src="../app/scripts/addplan.js"></script>
 </body>
 </html>
