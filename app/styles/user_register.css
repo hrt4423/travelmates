@@ -1,0 +1,71 @@
+body {
+    background-color: #62B073;
+    color: #fff;
+}
+
+/* ロゴ画像のスタイル */
+.logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 85px; /* 画像の幅を調整 */
+    height: auto;
+}
+
+/* タイトルからボタンまでのスタイル */
+.register-container {
+    max-width: 400px;
+    margin: 50px auto;
+    margin-top: 100px;
+    padding: 20px;
+}
+
+/* タイトル「新規登録」のスタイル */
+.register-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* テキストボックスのスタイル */
+.form-control {
+    background-color: #62B073;
+    color: #fff;
+    border: none;
+    border-bottom: 2px solid #fff;
+    border-radius: 0;
+    margin-bottom:45px;
+}
+
+/* プレースホルダーのスタイル */
+.form-control::placeholder {
+    color: #fff;
+}
+
+/* 入力時のスタイル */
+.form-control:focus::placeholder {
+    color: transparent;
+}
+
+.form-control:focus {
+    background-color: #62B073;
+    color: #fff;
+    border-color: #fff;
+    box-shadow: none;
+    outline: none;
+}
+
+/* 入力後のスタイル */
+.form-control:-webkit-autofill,
+.form-control:-webkit-autofill:hover,
+.form-control:-webkit-autofill:focus,
+.form-control:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px #62B073 inset;
+    -webkit-text-fill-color: #fff;
+    border-bottom: 2px solid #fff;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/*ボタンと入力エリアのマージン*/
+.form-row {
+    margin-top: 60px;
+}
