@@ -1,7 +1,7 @@
 CREATE DATABASE travelmates;
 
 -- 旅行テーブル
-CREATE TABLE travelmate.travel (
+CREATE TABLE travelmates.travel (
     travel_id INT NOT NULL AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,
     image_path VARCHAR(255) NOT NULL DEFAULT './assets/travel_image/default.png',
@@ -9,18 +9,18 @@ CREATE TABLE travelmate.travel (
     start_datetime DATETIME,
     end_datetime DATETIME,
     PRIMARY KEY (travel_id),
-    FOREIGN KEY (management_id) REFERENCES travelmate.user(user_id)
+    FOREIGN KEY (management_id) REFERENCES travelmates.user(user_id)
 );
 
 -- 移動手段テーブル
-CREATE TABLE travelmate.transport (
+CREATE TABLE travelmates.transport (
     transport_id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL UNIQUE,
     PRIMARY KEY (transport_id)
 );
 
 -- ユーザーテーブル
-CREATE TABLE travelmate.user (
+CREATE TABLE travelmates.user (
     user_id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE travelmate.user (
 );
 
 -- イベントテーブル
-CREATE TABLE travelmate.event (
+CREATE TABLE travelmates.event (
     event_id INT NOT NULL AUTO_INCREMENT,
     route_id INT NOT NULL,
     travel_id INT NOT NULL,
@@ -42,15 +42,15 @@ CREATE TABLE travelmate.event (
     place VARCHAR(255),
     event_detail VARCHAR(255),
     PRIMARY KEY (event_id),
-    FOREIGN KEY (travel_id) REFERENCES travelmate.travel(travel_id),
-    FOREIGN KEY (transport_id) REFERENCES travelmate.transport(transport_id)
+    FOREIGN KEY (travel_id) REFERENCES travelmates.travel(travel_id),
+    FOREIGN KEY (transport_id) REFERENCES travelmates.transport(transport_id)
 );
 
 -- メンバーテーブル
-CREATE TABLE travelmate.member (
+CREATE TABLE travelmates.member (
     travel_id INT NOT NULL,
     user_id INT NOT NULL,
     PRIMARY KEY (travel_id, user_id),
-    FOREIGN KEY (travel_id) REFERENCES travelmate.travel(travel_id),
-    FOREIGN KEY (user_id) REFERENCES travelmate.user(user_id)
+    FOREIGN KEY (travel_id) REFERENCES travelmates.travel(travel_id),
+    FOREIGN KEY (user_id) REFERENCES travelmates.user(user_id)
 );
