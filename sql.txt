@@ -1,4 +1,4 @@
-CREATE DATABASE travelmate;
+CREATE DATABASE travelmates;
 
 -- 旅行テーブル
 CREATE TABLE travelmate.travel (
