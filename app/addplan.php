@@ -20,8 +20,8 @@
                 <div class="tab" data-target="modal-tab2">予定</div>
             </div>
             <div id="modal-tab1" class="tab-content active">
-                <h2>タブ 1 の内容</h2>
-                <p>ここにタブ 1 の内容が表示されます。</p>
+                <h2>料金</h2>
+                
             </div>
             <div id="modal-tab2" class="tab-content">
                 <h2>タブ 2 の内容</h2>
