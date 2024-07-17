@@ -24,8 +24,8 @@
                 
             </div>
             <div id="modal-tab2" class="tab-content">
-                <h2>タブ 2 の内容</h2>
-                <p>ここにタブ 2 の内容が表示されます。</p>
+                <h2></h2>
+                <p></p>
             </div>
         </div>
     </div>
