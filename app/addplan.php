@@ -79,7 +79,7 @@
                 <hr>
                 <div class="addplans">
                     <h2>予定</h2>
-                    <input type="text" style="width:40%; height:70px;" name="plans">
+                    <textarea name="plans" cols="25" rows="3"></textarea>
                 </div>
             </div>
             <button class="submit" type="button">スケジュールを追加</button>
