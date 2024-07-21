@@ -22,8 +22,16 @@
                 <div class="tab" data-target="modal-tab2">予定</div>
             </div>
             <div id="modal-tab1" class="tab-content active">
-                <h2>料金</h2><br>
-                <input type="text" placeholder="" style="width:35%;" name="budget">円
+                <div class="money">
+                    <h2>料金</h2>
+                    <input type="text" style="width:35%;" name="budget">円
+
+                </div>
+                <hr width="547">
+                <div class="place">
+                    <h2>出発地</h2>
+                    <input type="text" style="width:35%;" name="start">
+                </div>
             </div>
             <div id="modal-tab2" class="tab-content">
                 <h2></h2>

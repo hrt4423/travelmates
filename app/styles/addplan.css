@@ -24,7 +24,7 @@
 #closeModal {
     color: #aaa;
     float: right;
-    font-size: 28px;
+    font-size: 25px;
     font-weight: bold;
 }
 
@@ -49,14 +49,14 @@
 .tab-container {
     display: flex;
     justify-content: center; 
-    border-bottom: 2px solid #ccc;
+    border-bottom: 1px solid #0b0b0b;
     cursor: pointer;
     
 }
 
 .tab {
     padding: 10px 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #0b0b0b;
     border-bottom: none;
     background-color: #f1f1f1;
     transition: background-color 0.3s ease;
@@ -78,7 +78,6 @@
 .tab-content {
     display: none;
     padding: 20px;
-    border: 1px solid #ccc;
     border-top: none;
 }
 
@@ -86,10 +85,13 @@
     display: block;
 }
 #modal-tab1{
-    display: flex;
-    flex-direction: column; /* 縦方向に要素を並べる */
-    justify-content: center;
-    align-items: center;
+    border: 1px solid #0b0b0b;
+}
+.money{
     text-align: center;
-   gap: 2px;
+}
+.money h2{
+    font-size: 20px;
+    margin-top: 7px;
+    margin-bottom: 5px;
 }
