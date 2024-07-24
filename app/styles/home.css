@@ -1,0 +1,63 @@
+.image-container {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.image-wrapper, .new-create-wrapper {
+    padding: 10px;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.image-wrapper img, .new-create-wrapper {
+    width: 100%;
+    height: 300px; /* 画像と同じ高さに設定 */
+    object-fit: cover; /* 画像が枠に収まるように調整 */
+    display: block;
+}
+
+.title {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    font-size: 24px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.new-create-wrapper {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    position: relative;
+    color: #888;
+}
+
+
+.new-create-wrapper:hover {
+    background-color: #e0e0e0;
+}
+
+.new-create {
+    font-size: 48px;
+}
+
+.new-create-title {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    text-align: center;
+    color: #888;
+}
