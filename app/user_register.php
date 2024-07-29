@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -12,22 +16,29 @@
     <div class="container">
         <div class="register-container">
             <h2>新規登録</h2>
-            <form>
+            <form action="./register.php" method="POST">
                 <!-- メールアドレスのテキストボックス -->
                 <div class="form-group">
-                    <input type="email" class="form-control" id="email" placeholder="Mail">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Mail">
                 </div>
                 <!-- ユーザーネームのテキストボックス -->
                 <div class="form-group">
-                    <input type="text" class="form-control" id="username" placeholder="Name">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Name">
                 </div>
                 <!-- パスワードのテキストボックス -->
                 <div class="form-group">
-                    <input type="password" class="form-control" id="password" placeholder="Pass">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Pass">
                 </div>
 
                 <!-- エラーメッセージの表示エリア -->
-                <div class="error-area">
+                <div class="error-area text-center">
+                    <?php 
+                        // エラーメッセージがセッションに保存されていれば表示する
+                        if (isset($_SESSION['error'])) {
+                            echo '<p style="color: red;">' . $_SESSION['error'] . '</p>';
+                            unset($_SESSION['error']); // セッションからエラーメッセージを削除
+                        }
+                    ?>
                 </div>
 
                 <!-- ボタンエリア -->
