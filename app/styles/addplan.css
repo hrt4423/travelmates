@@ -16,15 +16,15 @@
     margin: 3% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 50%;
-    height: 80%;
+    width: 40%;
+    height: 90%;
 }
 
 /* 閉じるボタンのスタイル */
 #closeModal {
     color: #aaa;
     float: right;
-    font-size: 28px;
+    font-size: 25px;
     font-weight: bold;
 }
 
@@ -49,14 +49,14 @@
 .tab-container {
     display: flex;
     justify-content: center; 
-    border-bottom: 2px solid #ccc;
+    border-bottom: 1px solid #0b0b0b;
     cursor: pointer;
     
 }
 
 .tab {
     padding: 10px 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #0b0b0b;
     border-bottom: none;
     background-color: #f1f1f1;
     transition: background-color 0.3s ease;
@@ -78,10 +78,115 @@
 .tab-content {
     display: none;
     padding: 20px;
-    border: 1px solid #ccc;
     border-top: none;
 }
 
 .tab-content.active {
     display: block;
+}
+#modal-tab1{
+    border: 1px solid #0b0b0b;
+}
+/*料金入力のスタイル*/
+.money{
+    text-align: center;
+}
+.money h2{
+    font-size: 20px;
+    margin-top: 7px;
+    margin-bottom: 5px;
+}
+/*場所のスタイル*/
+.place h2{
+    font-size: 15px;
+    margin-left: 50px;
+    margin-bottom: 5px;
+}
+/*テキストボックスのスタイル*/
+#modal-tab1 .place input {
+    margin-left: 35px;
+}
+/*要素を隣にする*/
+#modal-tab1 .place-time-container {
+    display: flex;
+    gap: 20px; /* 隣接する要素間のスペースを設定（必要に応じて調整） */
+}
+
+#modal-tab1 .place, 
+#modal-tab1 .time {
+    flex: 1;
+}
+/*時間のスタイル*/
+.time h2{
+    font-size: 15px;
+    margin-left: 40px;
+    margin-bottom: 5px;
+}
+#modal-tab1 .arrive-time-container {
+    display: flex;
+    gap: 20px; /* 隣接する要素間のスペースを設定（必要に応じて調整） */
+}
+/*到着時間*/
+#modal-tab1 .arrive-place, 
+#modal-tab1 .arrive-time {
+    flex: 1;
+}
+#modal-tab1 .arrive-place input {
+    margin-left: 35px;
+}
+.arrive-place h2{
+    font-size: 15px;
+    margin-left: 45px;
+    margin-bottom: 5px;
+}
+.arrive-time h2{
+    font-size: 15px;
+    margin-left: 40px;
+    margin-bottom: 5px;
+}
+/*移動方法*/
+.transportation{
+    text-align: center;
+}
+.transportation h2{
+    font-size: 20px;
+}
+.transportation select{
+    width: 40%;
+    text-align: center;
+}
+/*ボタン*/
+button.submit {
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 5px; /* 角を丸くする */
+    font-size: 16px; /* フォントサイズを16pxに設定 */
+}
+/*タブ２*/
+#modal-tab2{
+    border: 1px solid #0b0b0b;
+}
+.addplace{
+    text-align: center;
+}
+.addplace h2{
+    font-size: 20px;
+    margin-top: 7px;
+    margin-bottom: 5px;
+}
+.addtime h2{
+    font-size: 20px;
+}
+.addtime{
+    text-align: center;
+}
+.addplans h2{
+    font-size: 20px;
+}
+.addplans{
+    text-align: center;
+}
+input{
+    text-align: center;    
 }
