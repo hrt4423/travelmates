@@ -1,8 +1,8 @@
 const images = [
-    {src: "./assets/image/kari1.png", title: "タイトル1"},
-    {src: "./assets/image/kari2.png", title: "タイトル2"},
-    {src: "./assets/image/kari1.png", title: "タイトル3"},
-    {src: "./assets/image/kari2.png", title: "タイトル4"}
+    {src: "./assets/image/iStock-527885856-2-1200x675.avif", title: "タイトル1"},
+    {src: "./assets/image/fuji.webp", title: "タイトル2"},
+    {src: "./assets/image/iStock-527885856-2-1200x675.avif", title: "タイトル3"},
+    {src: "./assets/image/fuji.webp", title: "タイトル4"}
 ];
 
 const container = document.getElementById('imageContainer');
