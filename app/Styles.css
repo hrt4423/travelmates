@@ -1,0 +1,124 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    overflow: hidden; /* スクロールを防止 */
+}
+
+header {
+    background-color: white;
+    color: black;
+    text-align: center;
+    padding: 20px;
+}
+
+header h2 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+header input[type="text"] {
+    width: 80%;
+    max-width: 400px;
+    padding: 10px;
+    font-size: 1em;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    margin-top: 10px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    overflow: auto; /* 画像表示に合わせてスクロール */
+}
+
+main h2 {
+    margin: 0;
+}
+
+.image-preview {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.image-preview img {
+    width: 300px; /* 固定幅 */
+    height: 300px; /* 固定高さ */
+    object-fit: cover; /* 画像が指定サイズに合わせて切り取られる */
+    display: none;
+}
+
+main input[type="file"] {
+    margin-bottom: 5px;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: white;
+    color: black;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer .button-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+footer .button {
+    background-color: transparent;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+footer .button:hover {
+    text-decoration: underline;
+}
+
+.next-button {
+    margin-left: auto;
+}
+
+@media (max-width: 768px) {
+    header input[type="text"] {
+        width: 90%;
+        max-width: 300px;
+    }
+
+    footer {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h2 {
+        font-size: 1.2em;
+    }
+
+    header input[type="text"] {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .image-preview img {
+        width: 200px;
+        height: 200px;
+    }
+}

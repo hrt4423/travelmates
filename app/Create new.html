@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新規作成</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h2>タイトル</h2>
+        <input type="text" name="name" placeholder="テキストを入力">
+    </header>
+    <main>
+        <h2>写真</h2>
+        <div class="image-preview">
+            <img id="image-preview" src="" alt="画像プレビュー">
+        </div>
+        <input type="file" id="file-input" accept="image/*">
+    </main>
+    <footer>
+        <div class="button-container">
+            <button class="button" type="button">戻る</button>
+            <button class="button next-button" type="button">次に進む</button>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('file-input').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const imgElement = document.getElementById('image-preview');
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imgElement.src = e.target.result;
+                    imgElement.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                imgElement.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
