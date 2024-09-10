@@ -1,0 +1,48 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.section {
+    display: flex;
+    align-items: center; 
+    padding: 20px;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+.section:last-child {
+    border-bottom: none;
+}
+
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+button {
+    text-align: center;
+    background-color: #62B073;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+.button {
+    text-align: center;
+    padding: 10px 20px;
+    margin-top: 30px;
+}
+
+button.button_maru {
+    border-radius: 50px;
+}
+
+button:hover {
+    background-color: #2a8201;
+}
