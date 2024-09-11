@@ -1,3 +1,4 @@
+<!-- icon_set.php -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -6,40 +7,54 @@
     <title>アイコン設定</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/icon_set.css">
+    <link rel="stylesheet" href="./styles/header.css" type="text/css">
 </head>
 <body>
+
+    <!-- ヘッダー -->
+    <header class="header d-flex justify-content-between align-items-center">
+        <a href="index.html" class="nav-item">
+            <img src="./assets/logo_green.png" alt="Site Logo" class="site-logo">
+        </a>
+        <nav class="nav">
+            <div class="nav-item">
+                <a href="#">
+                    <img src="./assets/image/user_icon.svg" alt="User Icon" class="icon">
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#">
+                    <img src="./assets/image/notification.svg" alt="Notification Icon" class="icon">
+                </a>
+            </div>
+        </nav>
+    </header>
+
     <!-- メインコンテンツ -->
     <div class="container-fluid main-content">
-
         <!--タイトル-->
-            <h3>プロフィール画像を設定</h3>
+        <h3>プロフィール画像を設定</h3>
 
         <!--フォーム-->
-            <form action="" method="post" enctype="multipart/form-data">
-                <div class="image-container">
-
-                    <!--画像表示エリア-->
-                    <img id="profile-img" src="" class="profile-img">
-
-                    <!--ファイルアップロードボタン-->
-                    <label for="image-input" class="file-input-label">+</label>
-                    <input type="file" id="image-input" name="profile_image" accept="image/*">
-                </div>
-                
-                <!--決定ボタン-->
-                <div class="confirm-btn-container">
-                    <button type="submit" class="confirm-btn">決定</button>
-                </div>
-            </form>
-
-            <!--スキップリンク-->
-            <a href="#" class="skip-link">今は設定しない</a>
-
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="image-container">
+                <img id="profile-img" src="" class="profile-img">
+                <label for="image-input" class="file-input-label">+</label>
+                <input type="file" id="image-input" name="profile_image" accept="image/*">
+            </div>
+            <!--決定ボタン-->
+            <div class="confirm-btn-container">
+                <button type="submit" class="confirm-btn">決定</button>
+            </div>
+        </form>
+        <!--今は設定しないリンク-->
+        <a href="#" class="skip-link">今は設定しない</a>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="./scripts/header.js"></script>
     <script>
         document.getElementById('image-input').addEventListener('change', function(event) {
             const file = event.target.files[0];
