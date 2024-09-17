@@ -1,0 +1,273 @@
+/* 全体のスタイル */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+.main-header {
+    background-color: #4CAF50;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+    padding: 20px;
+}
+
+nav a.back {
+    display: inline-block;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* ルート情報と追加ボタン */
+.trip-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.trip-info h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.trip-info button.add-route {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.trip-info p {
+    margin: 0;
+}
+
+/* ルートリストとカルーセルの調整 */
+main {
+    display: flex;
+    justify-content: space-between;
+}
+
+.carousel-container {
+    position: relative;
+    width: calc(100% - 220px);
+}
+
+.routes {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    margin-bottom: 20px;
+}
+
+/* 各ルートカードのスタイル */
+.route {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-right: 20px;
+    min-width: 300px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.route:hover {
+    transform: translateY(-5px);
+}
+
+.route header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.route header h2 {
+    margin: 0;
+}
+
+.route header button.delete {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.route header button.delete:hover {
+    background-color: #d32f2f;
+}
+
+/* スケジュールリスト */
+.schedule {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.schedule li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.schedule li span {
+    flex: 1;
+    font-size: 14px;
+    color: #333;
+}
+
+.schedule li button.edit {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button.add-schedule {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    margin: 10px 0;
+    width: 100%;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+button.add-schedule:hover {
+    background-color: #45a049;
+}
+
+/* カルーセルのボタン */
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+    border-radius: 50%;
+}
+
+.carousel-button.left {
+    left: 0;
+}
+
+.carousel-button.right {
+    right: 0;
+}
+
+/* モーダルのスタイル */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: none;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.3s;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* モーダル内フォームのスタイル */
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-content form label {
+    font-weight: bold;
+}
+
+.modal-content form input,
+.modal-content form textarea,
+.modal-content form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.modal-content form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modal-content form button:hover {
+    background-color: #45a049;
+}
+
+/* アニメーション */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); }
+    to { transform: translateY(0); }
+}
