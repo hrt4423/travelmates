@@ -1,5 +1,5 @@
 <?php
-include 'config.php'; // データベース接続
+include 'post_config.php'; // データベース接続
 
 try {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
