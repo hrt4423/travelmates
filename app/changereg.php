@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>登録内容変更</title>
-    <link rel="stylesheet" href="./styles/changereg.css">
+    <link rel="stylesheet" href="../app/styles/changereg.css?<?php echo date('YmdHis'); ?>">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="./styles/header.css" type="text/css">
 </head>
@@ -29,20 +29,24 @@
         </nav>
     </header>
 
-    <div class="section" id="user-name">
+    <div class="section" id="profile-id">
         <p>
             <img src="./assets/image/mypage_icon.svg" alt="User Profile" class="profile-icon">
-            <span id="username">プロフィール画像</span>
+            <span id="profile">プロフィール画像</span>
+            <a href="xxxx.html">変更＞</a>
         </p>
     </div>
-    <div class="section" id="name">
-        <div>なまえ </div><span id="name">ハム太郎</span>
+    <div class=" section" id="user-name">
+        <div>名前 </div><span id="name">ハム太郎</span>
+        <a href="xxxx.html">変更＞</a>
     </div>
     <div class="section" id="user-mail">
-        <div>メールアドレス<span id="email">user@example.com</span></div>
+        <div>メールアドレス</div><span id="email">user@example.com</span>
+        <a href="xxxx.html">変更＞</a>
     </div>
     <div class="section" id="edit-info">
         <div>パスワード</div>
+        <a href="xxxx.html">変更＞</a>
     </div>
     <div align="center" class="button">
         <button class="button_maru" onclick="back()">戻る</button>　　　　　　　　　　　　　
