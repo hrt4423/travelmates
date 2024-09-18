@@ -37,7 +37,7 @@
         <button class="button_maru" onclick="back()">戻る</button>　　　　　　　　　　　　　
         <button class="button_maru" onclick="complete()">保存</button>
     </div>
-    <script src="./scripts/changereg.js"></script>
+    <script src="./scripts/changename.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
