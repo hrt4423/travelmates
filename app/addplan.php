@@ -10,6 +10,19 @@
 </head>
 
 <body>
+    <!-- セッションから旅行タイトルを取得、表示 -->
+    <?php
+    session_start();
+    echo '<div id="title">';
+    if (isset($_SESSION['title'])) {
+        $title = $_SESSION['title'];
+        echo htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
+    } else {
+        echo 'タイトルが設定されていません。';
+    }
+    echo '</div>';
+    ?>
+
     <!-- ボタン -->
     <button id="openModal">予定を追加する</button>
 

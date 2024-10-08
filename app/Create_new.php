@@ -1,8 +1,9 @@
 <?php
+//ログインしていない場合login.phpに飛ぶよう変更
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: user_login.php");
     exit();
 }
 ?>
@@ -14,8 +15,6 @@ if (!isset($_SESSION['user_id'])) {
     <title>新規作成</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="./styles/Styles.css">
-
-
 </head>
 <body>
     <header class="header d-flex justify-content-between align-items-center">
@@ -36,20 +35,23 @@ if (!isset($_SESSION['user_id'])) {
         </nav>
     </header>
     <main>
-        <h2>タイトル</h2>
-        <input type="text" name="name" placeholder="テキストを入力">
-        <h2>写真</h2>
-        <div class="image-preview">
-            <img id="image-preview" src="" alt="画像プレビュー">
-        </div>
-        <input type="file" id="file-input" accept="image/*">
+        <!-- DB追加用phpファイルCreate_new_db.phpに飛ぶよう変更-->
+        <form action="Create_new_db.php" method="POST" enctype="multipart/form-data">
+            <h2>タイトル</h2>
+            <input type="text" name="title" placeholder="テキストを入力" required>
+            
+            <h2>写真</h2>
+            <div class="image-preview">
+                <img id="image-preview" src="" alt="画像プレビュー">
+            </div>
+            <input type="file" id="file-input" name="image" accept="image/*" required>
+
+            <div class="button-container">
+                <button class="button" type="button">戻る</button>
+                <button class="button next-button" type="submit">次に進む</button>
+            </div>
+        </form>
     </main>
-    <footer>
-        <div class="button-container">
-            <button class="button" type="button">戻る</button>
-            <button class="button next-button" type="button">次に進む</button>
-        </div>
-    </footer>
 
     <script>
         document.getElementById('file-input').addEventListener('change', function(event) {
@@ -68,9 +70,9 @@ if (!isset($_SESSION['user_id'])) {
         });
     </script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="./scripts/home.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="./scripts/home.js"></script>
 </body>
 </html>
