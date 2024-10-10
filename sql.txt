@@ -1,56 +1,249 @@
-CREATE DATABASE travelmates;
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- ホスト: 127.0.0.1
+-- 生成日時: 2024-09-11 03:50:06
+-- サーバのバージョン： 10.4.28-MariaDB
+-- PHP のバージョン: 8.2.4
 
--- ユーザーテーブル
-CREATE TABLE travelmates.user (
-    user_id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    icon_path VARCHAR(255) NOT NULL DEFAULT './assets/user_icon/default.png',
-    PRIMARY KEY (user_id)
-);
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
--- 旅行テーブル
-CREATE TABLE travelmates.travel (
-    travel_id INT NOT NULL AUTO_INCREMENT,
-    title VARCHAR(255) NOT NULL,
-    image_path VARCHAR(255) NOT NULL DEFAULT './assets/travel_image/default.png',
-    management_id INT NOT NULL,
-    start_datetime DATETIME,
-    end_datetime DATETIME,
-    PRIMARY KEY (travel_id),
-    FOREIGN KEY (management_id) REFERENCES travelmates.user(user_id)
-);
 
--- 移動手段テーブル
-CREATE TABLE travelmates.transport (
-    transport_id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL UNIQUE,
-    PRIMARY KEY (transport_id)
-);
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
--- イベントテーブル
-CREATE TABLE travelmates.event (
-    event_id INT NOT NULL AUTO_INCREMENT,
-    route_id INT NOT NULL,
-    travel_id INT NOT NULL,
-    is_transport BOOLEAN NOT NULL,
-    charge INT NOT NULL DEFAULT 0,
-    start_datetime DATETIME NOT NULL,
-    end_datetime DATETIME NOT NULL,
-    transport_id INT NOT NULL,
-    place VARCHAR(255),
-    event_detail VARCHAR(255),
-    PRIMARY KEY (event_id),
-    FOREIGN KEY (travel_id) REFERENCES travelmates.travel(travel_id),
-    FOREIGN KEY (transport_id) REFERENCES travelmates.transport(transport_id)
-);
+--
+-- データベース: `travelmates`
+--
 
--- メンバーテーブル
-CREATE TABLE travelmates.member (
-    travel_id INT NOT NULL,
-    user_id INT NOT NULL,
-    PRIMARY KEY (travel_id, user_id),
-    FOREIGN KEY (travel_id) REFERENCES travelmates.travel(travel_id),
-    FOREIGN KEY (user_id) REFERENCES travelmates.user(user_id)
-);
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `event`
+--
+
+CREATE TABLE `event` (
+  `event_id` int(11) NOT NULL,
+  `route_id` int(11) NOT NULL,
+  `travel_id` int(11) NOT NULL,
+  `is_transport` tinyint(1) NOT NULL,
+  `charge` int(11) NOT NULL DEFAULT 0,
+  `start_datetime` datetime NOT NULL,
+  `end_datetime` datetime NOT NULL,
+  `transport_id` int(11) NOT NULL,
+  `place` varchar(255) DEFAULT NULL,
+  `event_detail` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `member`
+--
+
+CREATE TABLE `member` (
+  `travel_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `routes`
+--
+
+CREATE TABLE `routes` (
+  `id` int(11) NOT NULL,
+  `route_name` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `schedules`
+--
+
+CREATE TABLE `schedules` (
+  `id` int(11) NOT NULL,
+  `route_id` int(11) DEFAULT NULL,
+  `departure` varchar(255) DEFAULT NULL,
+  `departure_time` time DEFAULT NULL,
+  `via` varchar(255) DEFAULT NULL,
+  `destination` varchar(255) DEFAULT NULL,
+  `arrival_time` time DEFAULT NULL,
+  `transportation` varchar(255) DEFAULT NULL,
+  `cost` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `transport`
+--
+
+CREATE TABLE `transport` (
+  `transport_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `travel`
+--
+
+CREATE TABLE `travel` (
+  `travel_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `image_path` varchar(255) NOT NULL DEFAULT './assets/travel_image/default.png',
+  `management_id` int(11) NOT NULL,
+  `start_datetime` datetime DEFAULT NULL,
+  `end_datetime` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `user`
+--
+
+CREATE TABLE `user` (
+  `user_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `icon_path` varchar(255) NOT NULL DEFAULT './assets/user_icon/default.png'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- ダンプしたテーブルのインデックス
+--
+
+--
+-- テーブルのインデックス `event`
+--
+ALTER TABLE `event`
+  ADD PRIMARY KEY (`event_id`),
+  ADD KEY `travel_id` (`travel_id`),
+  ADD KEY `transport_id` (`transport_id`);
+
+--
+-- テーブルのインデックス `member`
+--
+ALTER TABLE `member`
+  ADD PRIMARY KEY (`travel_id`,`user_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- テーブルのインデックス `routes`
+--
+ALTER TABLE `routes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- テーブルのインデックス `schedules`
+--
+ALTER TABLE `schedules`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `route_id` (`route_id`);
+
+--
+-- テーブルのインデックス `transport`
+--
+ALTER TABLE `transport`
+  ADD PRIMARY KEY (`transport_id`),
+  ADD UNIQUE KEY `name` (`name`);
+
+--
+-- テーブルのインデックス `travel`
+--
+ALTER TABLE `travel`
+  ADD PRIMARY KEY (`travel_id`),
+  ADD KEY `management_id` (`management_id`);
+
+--
+-- テーブルのインデックス `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- ダンプしたテーブルの AUTO_INCREMENT
+--
+
+--
+-- テーブルの AUTO_INCREMENT `event`
+--
+ALTER TABLE `event`
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- テーブルの AUTO_INCREMENT `routes`
+--
+ALTER TABLE `routes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- テーブルの AUTO_INCREMENT `schedules`
+--
+ALTER TABLE `schedules`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- テーブルの AUTO_INCREMENT `transport`
+--
+ALTER TABLE `transport`
+  MODIFY `transport_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- テーブルの AUTO_INCREMENT `travel`
+--
+ALTER TABLE `travel`
+  MODIFY `travel_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- テーブルの AUTO_INCREMENT `user`
+--
+ALTER TABLE `user`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- ダンプしたテーブルの制約
+--
+
+--
+-- テーブルの制約 `event`
+--
+ALTER TABLE `event`
+  ADD CONSTRAINT `event_ibfk_1` FOREIGN KEY (`travel_id`) REFERENCES `travel` (`travel_id`),
+  ADD CONSTRAINT `event_ibfk_2` FOREIGN KEY (`transport_id`) REFERENCES `transport` (`transport_id`);
+
+--
+-- テーブルの制約 `member`
+--
+ALTER TABLE `member`
+  ADD CONSTRAINT `member_ibfk_1` FOREIGN KEY (`travel_id`) REFERENCES `travel` (`travel_id`),
+  ADD CONSTRAINT `member_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+
+--
+-- テーブルの制約 `schedules`
+--
+ALTER TABLE `schedules`
+  ADD CONSTRAINT `schedules_ibfk_1` FOREIGN KEY (`route_id`) REFERENCES `routes` (`id`) ON DELETE CASCADE;
+
+--
+-- テーブルの制約 `travel`
+--
+ALTER TABLE `travel`
+  ADD CONSTRAINT `travel_ibfk_1` FOREIGN KEY (`management_id`) REFERENCES `user` (`user_id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
