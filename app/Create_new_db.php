@@ -32,8 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = $_SESSION['title'];
     $image_path = $_SESSION['image_path'];
     $management_id = $_SESSION['user_id'];  // ユーザーID（管理ID）としてセッションのuser_idを使用
-    $start_datetime = 0;  // 開始日時
-    $end_datetime = 0;      // 終了日時
+    $start_datetime = 0;  // 開始日時（本来は適切な値を設定する必要があります）
+    $end_datetime = 0;    // 終了日時（本来は適切な値を設定する必要があります）
 
     // データベース接続情報
     $dsn = 'mysql:host=localhost;dbname=travelmates;charset=utf8';
@@ -59,6 +59,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // SQLを実行してデータを挿入
         $stmt->execute();
+
+        // 挿入されたtravel_idを取得
+        $travel_id = $pdo->lastInsertId();
+
+        // 挿入されたtravel_idをセッションに保存
+        $_SESSION['travel_id'] = $travel_id;
 
         // 正常に追加されたら次のページにリダイレクト
         header("Location: addplan.php");
