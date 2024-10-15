@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>マイページ</title>
-    <link rel="stylesheet" href="./styles/mypage.css">
+    <title>登録内容変更</title>
+    <link rel="stylesheet" href="../app/styles/changereg.css?<?php echo date('YmdHis'); ?>">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="./styles/header.css" type="text/css">
 </head>
+
 <body>
     <header class="header d-flex justify-content-between align-items-center">
         <a href="index.html" class="nav-item">
-            <img src="./assets/logo.png" alt="Site Logo" class="site-logo">
+            <img src="./assets/logo_green.png" alt="Site Logo" class="site-logo">
         </a>
         <nav class="nav">
             <div class="nav-item">
@@ -27,29 +29,35 @@
         </nav>
     </header>
 
-    <div class="section" id="user-name">
+    <div class="section" id="profile-id">
         <p>
             <img src="./assets/image/mypage_icon.svg" alt="User Profile" class="profile-icon">
-            <span id="username">なまえ</span>
+            <span id="profile">プロフィール画像</span>
+
         </p>
     </div>
-    <div class="section" id="user-mail">
-        <div>メールアドレス: <span id="email">user@example.com</span></div>
+    <div class=" section" id="user-name">
+        <div>名前 </div><span id="name">ハム太郎</span>
+        <a href="xxxx.html">変更＞</a>
     </div>
-    <div class="section" id="schedule">
-        <div>予定一覧</div>
+    <div class="section" id="user-mail">
+        <div>メールアドレス</div><span id="email">user@example.com</span>
+        <a href="xxxx.html">変更＞</a>
     </div>
     <div class="section" id="edit-info">
-        <div>登録内容変更</div>
+        <div>パスワード</div>
+        <a href="xxxx.html"></a>
     </div>
     <div align="center" class="button">
-        <button class="button_maru" onclick="logout()">ログアウト</button>
+        <button class="button_maru" onclick="back()">戻る</button>　　　　　　　　　　　　　
+        <button class="button_maru" onclick="complete()">完了</button>
     </div>
-    <script src="./scripts/mypage.js"></script>
+    <script src="./scripts/changereg.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="./scripts/header.js"></script>
 </body>
+
 </html>

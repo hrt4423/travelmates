@@ -70,7 +70,7 @@
             $stmt->bindParam(':email',$email);
             $stmt->execute();
 
-            header("Location: ./login.html");
+            header("Location: ./user_login.php");
 
         } catch (PDOException $e) {
             echo "エラー: " . $e->getMessage();

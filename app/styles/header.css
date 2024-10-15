@@ -21,8 +21,8 @@
 }
 
 .site-logo {
-    width: 60px;
-    height: 60px;
+    width: 100px;
+    height: 100px;
 }
 
 .icon {
@@ -52,17 +52,12 @@ body {
     }
 
     .site-logo {
-        width: 40px;
-        height: 40px;
+        width: 60px;
+        height: 60px;
     }
     
     .icon {
         width: 20px;
         height: 20px;
     }
-
-    /* .header .nav-item img {
-        width: 20px;
-        height: 20px;
-    } */
 }
