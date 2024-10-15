@@ -1,6 +1,4 @@
 <?php
-  namespace travel_mates;
-  use \PDO;
   class Member {
     private $pdo;
     

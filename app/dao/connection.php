@@ -1,6 +1,4 @@
 <?php
-  namespace travel_mates;
-
   class Connection{
     
     private $pdo;
