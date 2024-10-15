@@ -5,9 +5,9 @@
     
     private $pdo;
     private $dsn = 'mysql:dbname=travelmates;host=localhost';
-    private $username = 'abccsd2';
+    private $username = 'root';
     private $password = 'root';
-    private $dbname = 'root';
+    private $dbname = 'travelmates';
     private $hostname = "localhost";
 
 

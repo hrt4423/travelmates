@@ -1,34 +1,45 @@
 <?php
-// データベース接続設定
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "travelmates";
+// // データベース接続設定
+// $servername = "localhost";
+// $username = "root";
+// $password = "root";
+// $dbname = "travelmates";
 
-// MySQLiで接続
-$conn = new mysqli($servername, $username, $password, $dbname);
+// // MySQLiで接続
+// $conn = new mysqli($servername, $username, $password, $dbname);
 
-// 接続チェック
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+// // 接続チェック
+// if ($conn->connect_error) {
+//     die("Connection failed: " . $conn->connect_error);
+// }
 
-// travelテーブルからtitleを取得するSQL
-$sql = "SELECT title FROM travel";
-$result = $conn->query($sql);
+// // travelテーブルからtitleを取得するSQL
+// $sql = "SELECT title FROM travel";
+// $result = $conn->query($sql);
 
-$titles = array();
+// $titles = array();
 
-if ($result->num_rows > 0) {
-    // 取得したデータを配列に保存
-    while($row = $result->fetch_assoc()) {
-        $titles[] = $row['title'];
-    }
-}
+// if ($result->num_rows > 0) {
+//     // 取得したデータを配列に保存
+//     while($row = $result->fetch_assoc()) {
+//         $titles[] = $row['title'];
+//     }
+// }
 
-// データをJSON形式で返す
-echo json_encode($titles);
+// // データをJSON形式で返す
+// echo json_encode($titles);
 
-// 接続を閉じる
-$conn->close();
+// // 接続を閉じる
+// $conn->close();
+
+namespace travel_mates;
+
+require_once('Travel.php');
+$travel = new Travel;
+
+$titles = $travel->getTravelTitle(1);
+
+var_dump($titles);
+
 ?>
+

@@ -1,12 +1,14 @@
 <?php
   namespace travel_mates;
   use \PDO;
+  use \Connect;
+  
   class Travel {
     private $pdo;
     
     public function __construct() {
-      require_once('connect.php');
-      $connect = new Connect();
+      require_once('Connect.php');
+      $connect = new Connection();
       $this->pdo = $connect->getPdo();
     }
     public function getTravelTitle($travel_id) {

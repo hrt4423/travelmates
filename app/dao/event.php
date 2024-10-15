@@ -9,5 +9,7 @@
       $connect = new Connect();
       $this->pdo = $connect->getPdo();
     }
+
+    
   }
 ?>
