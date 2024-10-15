@@ -9,14 +9,11 @@
       $connect = new Connect();
       $this->pdo = $connect->getPdo();
     }
-    public function getTravelTitle($password,$email) {
-        $sql = "SELECT * FROM user , member WHERE $password = ? AND  $email = ?";
+    public function getTravelTitle($travel_id) {
+        $sql = "SELECT title FROM travel";
         $ps = $this->pdo->prepare($sql);
-        $ps->bindValue(1, $password, PDO::PARAM_STR);
-        $ps->bindValue(2, $email, PDO::PARAM_STR);
         $ps->execute();
-        $result = $ps->fetch(PDO::FETCH_ASSOC);
-        return $result['user_id']; 
+        return $ps->fetch(PDO::FETCH_ASSOC);
     }
   }
 ?>
