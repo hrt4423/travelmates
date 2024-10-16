@@ -32,7 +32,7 @@ images.forEach(image => {
 const newCreateWrapper = document.createElement('div');
 newCreateWrapper.className = 'col-12 col-md-6 new-create-wrapper';
 newCreateWrapper.onclick = function() {
-    window.location.href = 'new_create.html'; // 新規作成ページへのリンク
+    window.location.href = 'Create_new.php'; // 新規作成ページへのリンク
 };
 
 const newCreateTitle = document.createElement('div');

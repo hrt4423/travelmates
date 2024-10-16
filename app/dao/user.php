@@ -1,12 +1,10 @@
 <?php
-  namespace travel_mates;
-  use \PDO;
   class User {
     private $pdo;
     
     public function __construct() {
-      require_once('connect.php');
-      $connect = new Connect();
+      require_once('Connection.php');
+      $connect = new Connection();
       $this->pdo = $connect->getPdo();
     }
     public function registUser($userData) {

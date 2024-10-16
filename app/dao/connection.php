@@ -1,6 +1,4 @@
 <?php
-  namespace travel_mates;
-
   class Connection{
     
     private $pdo;
@@ -10,10 +8,9 @@
     private $dbname = 'travelmates';
     private $hostname = "localhost";
 
-
     public function __construct() {
       try{
-        $this->pdo = new \PDO($this->dsn, $this->username, $this->password);
+        $this->pdo = new PDO($this->dsn, $this->username, $this->password);
       }catch (\PDOException $e){
         print('Error:'.$e->getMessage());
         die();

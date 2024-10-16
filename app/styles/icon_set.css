@@ -1,0 +1,96 @@
+/* HTMLとBODYの基本スタイル */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* メインコンテンツのスタイル */
+.main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* ビューポートの高さに合わせる */
+    flex-direction: column;
+    text-align: center; /* 中央揃え */
+}
+
+/* 画像コンテナのスタイル */
+.image-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* プロフィール画像のスタイル */
+.profile-img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px dotted #000; /* 点線の境界線を追加 */
+}
+
+/* 画像入力フィールドのスタイル（非表示） */
+#image-input {
+    display: none; /* ボタンを非表示にする */
+}
+
+/* ファイル入力ボタンのスタイル */
+.file-input-label {
+    position: absolute;
+    right: -10px; /* 画像の右側に移動 */
+    bottom: -10px; /* 画像の下側に移動 */
+    background-color: #007bff;
+    color: white;
+    width: 60px; /* 幅を大きくする */
+    height: 60px; /* 高さを大きくする */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 30px; /* フォントサイズを大きくする */
+    line-height: 1;
+    border: 2px solid #007bff; /* ボーダーを追加 */
+}
+
+/* 決定ボタンコンテナのスタイル */
+.confirm-btn-container {
+    display: flex;
+    flex-direction: column; /* 縦に配置 */
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* 決定ボタンのスタイル */
+.confirm-btn {
+    background-color: white;
+    color: black;
+    border: 2px solid black; /* 外枠を黒にする */
+    border-radius: 25px; /* 横長の円形 */
+    padding: 10px 60px; /* サイズ調整：横幅を広げる */
+    font-size: 18px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s;
+    margin-bottom: 10px; /* 下にマージンを追加 */
+}
+
+/* 決定ボタンのホバースタイル */
+.confirm-btn:hover {
+    background-color: #f8f9fa; /* ホバー時の背景色を変更 */
+}
+
+/* スキップリンクのスタイル */
+.skip-link {
+    color: black;
+    text-decoration: underline; /* 常に下線を表示 */
+    font-size: 16px;
+}
+
+/* スキップリンクのホバースタイル */
+.skip-link:hover {
+    text-decoration: none; /* ホバー時に下線を削除 */
+}

@@ -1,13 +1,9 @@
 <?php
-  namespace travel_mates;
-  use \PDO;
-  use \Connect;
-  
   class Travel {
     private $pdo;
     
     public function __construct() {
-      require_once('Connect.php');
+      require_once('Connection.php');
       $connect = new Connection();
       $this->pdo = $connect->getPdo();
     }
