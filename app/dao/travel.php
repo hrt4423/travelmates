@@ -3,7 +3,7 @@
     private $pdo;
     
     public function __construct() {
-      require_once('connect.php');
+      require_once('Connection.php');
       $connect = new Connection();
       $this->pdo = $connect->getPdo();
     }
