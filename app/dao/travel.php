@@ -15,7 +15,7 @@
     }
 
     public function addSampleData() {
-      $sql = "INSERT INTO travel (title, managed_id) VALUES ('サンプルデータ', 1)";
+      $sql = "INSERT INTO travel (title, management_id) VALUES ('サンプルデータ', 1)";
       $ps = $this->pdo->prepare($sql);
       $ps->execute();
     }
