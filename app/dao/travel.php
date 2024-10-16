@@ -13,5 +13,11 @@
         $ps->execute();
         return $ps->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function addSampleData() {
+      $sql = "INSERT INTO travel (title, managed_id) VALUES ('サンプルデータ', 1)";
+      $ps = $this->pdo->prepare($sql);
+      $ps->execute();
+    }
   }
 ?>
