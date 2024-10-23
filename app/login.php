@@ -32,7 +32,7 @@
             $_SESSION['user_id'] = $user['user_id'];
 
             // ログイン後のページへリダイレクト
-            header('Location: ./home.html');
+            header('Location: ./home.php');
             exit;
         } else {
             $error = "メールアドレスまたは、パスワードが間違っています。";

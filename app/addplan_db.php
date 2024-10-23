@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindValue(':charge', 0, PDO::PARAM_INT); // この行をSQLクエリに合わせて修正
         $stmt->bindValue(':start_datetime', $plan_datetime, PDO::PARAM_STR);
         $stmt->bindValue(':end_datetime', $plan_datetime, PDO::PARAM_STR);
-        $stmt->bindValue(':transport_id', 5, PDO::PARAM_INT); // 仮の transport_id
+        $stmt->bindValue(':transport_id', 1, PDO::PARAM_INT); // 仮の transport_id
         $stmt->bindValue(':place', $place, PDO::PARAM_STR);  // データ型を修正
         $stmt->bindValue(':event_detail', $plan_end, PDO::PARAM_STR);  // データ型を修正
 
@@ -102,3 +102,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo "POSTリクエストがありません。";
 }
+
+header('location: ./addplan.php');
+?>

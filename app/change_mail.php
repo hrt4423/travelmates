@@ -38,7 +38,7 @@
         新しいメールアドレス：<input type="text">
     </div>
     <div align="center" class="button">
-        <button class="button_maru" onclick="back()">戻る</button>　　　　　　　　　　　　　
+        <button class="button_maru" onclick="back()">戻る</button>
         <button class="button_maru" onclick="complete()">保存</button>
     </div>
     <script src="./scripts/changereg.js"></script>

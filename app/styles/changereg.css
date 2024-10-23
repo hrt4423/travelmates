@@ -62,3 +62,7 @@ button.button_maru {
 button:hover {
     background-color: #2a8201;
 }
+
+#change-password {
+    margin: 0 0 0 auto;
+}
