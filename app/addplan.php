@@ -152,6 +152,6 @@
         </div>
     </div>
 
-    <script src="../app/scripts/addplan2.js"></script>
+    <script src="../app/scripts/addplan.js"></script>
 </body>
 </html>
