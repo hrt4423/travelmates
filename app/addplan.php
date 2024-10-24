@@ -35,18 +35,20 @@
                         if($route_db == $route_set){
                             echo "<div class='col-12 route' data-route-number='{$lastRouteNumber}'>
                                 <p>場所{$place}</p>                                
-                            </div>";
+                            ";
                         }else{
                             $lastRouteNumber += 1;
                             echo "<div class='col-12 route' data-route-number='{$lastRouteNumber}'>
                                 <p>ルート{$lastRouteNumber}</p>
                                 <p>場所{$place}</p>
-                            </div>";
+                            ";
                         }
                         $route_set = $route_db;//route_dbはデータベースから取得したルート番号 route_setは現在表示されている一番下のルート番号
                     }
                     if ($route_db == $route_set) {
-                        echo "<div class='col-12 route' data-route-number='{$lastRouteNumber}'><button id='{$lastRouteNumber}' class='openModalButton'>予定を追加する</button></div>";
+                        echo "<button id='{$lastRouteNumber}' class='openModalButton'>予定を追加する</button></div>";
+                    }else{
+                        echo "<div>";
                     }
                 } else {
                     $lastRouteNumber = 0;
