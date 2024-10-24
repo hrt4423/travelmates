@@ -43,7 +43,7 @@
         <div><a href="./change_reg.php">登録内容変更</a></div>
     </div>
     <div align="center" class="button">
-        <button class="button_maru"><a href="./logout.php">ログアウト</a></button>
+        <a href="./logout.php"><button class="button_maru">ログアウト</button></a>
     </div>
     <script src="./scripts/mypage.js"></script>
 
