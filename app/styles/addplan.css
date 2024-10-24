@@ -190,3 +190,44 @@ button.submit {
 input{
     text-align: center;    
 }
+/* 横スクロールを有効化するための設定 */
+#routes {
+    display: flex;
+    flex-wrap: nowrap;  /* 子要素を1行に並べる */
+    overflow-x: auto;  /* 横スクロールを有効化 */
+    overflow-y: hidden;  /* 縦スクロールを無効化 */
+    white-space: nowrap;
+    height: 100%;  /* コンテナ全体の高さを使用 */
+    padding-bottom: 10px;  /* スクロールバー分の余白 */
+}
+
+/* 各ルートカードのスタイル */
+.route {
+    flex: 0 0 auto;  /* 横並びにするための設定 */
+    width: 300px;
+    margin: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    scroll-snap-align: center;  /* スクロール時に中央に揃える */
+}
+
+/* 親コンテナの高さ調整 */
+.container {
+    height: 100vh;  /* ビューポート全体の高さを使用 */
+    overflow: hidden;  /* 縦方向のスクロールを無効化 */
+    display: flex;
+    flex-direction: column;
+}
+
+/* スクロールバーの見た目をカスタマイズ */
+#routes::-webkit-scrollbar {
+    height: 8px;  /* 横スクロールバーの高さ */
+}
+
+#routes::-webkit-scrollbar-thumb {
+    background-color: #bbb;  /* スクロールバーの色 */
+    border-radius: 4px;
+}
