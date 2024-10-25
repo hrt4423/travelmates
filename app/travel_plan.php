@@ -120,7 +120,7 @@ session_start()
         </div>
 
         <!-- タブ1：移動 -->
-        <form id="scheduleForm1" action="addplan_db.php" method="POST">
+        <form id="scheduleForm1" action="registerEvent.php" method="POST">
           <input type="hidden" name="last_route_number" value="<?php echo $lastRouteNumber; ?>">
           <!--ルートナンバーをjavascriptからpostで受け取る-->
           <input type="hidden" id="routeNumberInput1" name="routeNumber" value="">
@@ -169,7 +169,7 @@ session_start()
         </form>
 
         <!-- タブ2：予定 -->
-        <form id="scheduleForm2" action="addplan_db.php" method="POST">
+        <form id="scheduleForm2" action="registerEvent.php" method="POST">
           <input type="hidden" name="last_route_number" value="<?php echo $lastRouteNumber; ?>">
           <input type="hidden" id="routeNumberInput2" name="routeNumber" value="">
           <div id="modal-tab2" class="tab-content">
