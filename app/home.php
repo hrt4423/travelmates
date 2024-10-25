@@ -35,24 +35,27 @@
       </div>
     </nav>
   </header>
+  <?php echo("ユーザーID：".$_SESSION['user_id']."<br>"); ?>
+  <a href="./Create_new.php" class="btn btn-primary">新規作成</a>
+  <hr>
   <?php
-    echo("ユーザーID：".$_SESSION['user_id']."<br>");
     require_once('dao/travel.php');
     require_once('dao/member.php');
     $travel = new Travel();
     $member = new Member();
-    $travel_id_list = $member->getTravelIdListByUserId($_SESSION['user_id']);
+    $travel_id_list = $member->searchTravelIdListByUserId($_SESSION['user_id']);
 
     foreach($travel_id_list as $travel_id) {
-      $travel_data = $travel->getTravelByTravelId($travel_id);
+      $travel_data = $travel->findTravelByTravelId($travel_id);
       echo("ID:".$travel_data['travel_id']."<br>");
       echo("タイトル：".$travel_data['title']."<br>");
       echo("作成者ID：".$travel_data['management_id']."<br>");
+      echo('<a href="./travel_plan.php?travel_id='.$travel_id.'">編集</a>');
       echo("<hr>");
     }
   ?>
 
-    <a href="./Create_new.php" class="btn btn-primary">新規作成</a>
+    
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

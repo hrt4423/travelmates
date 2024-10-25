@@ -66,8 +66,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // 挿入されたtravel_idをセッションに保存
         $_SESSION['travel_id'] = $travel_id;
 
+        //memberテーブルに追加　作業者：平田------------------------
+        require_once('dao/member.php');
+        $member = new Member();
+        $member->registerMember($travel_id, $management_id);
+        //--------------------------------------------------------
+
         // 正常に追加されたら次のページにリダイレクト
-        header("Location: addplan.php");
+        header("Location: travel_plan.php?travel_id=$travel_id");
         exit();
     } catch (PDOException $e) {
         // エラーが発生した場合、エラーメッセージを表示
