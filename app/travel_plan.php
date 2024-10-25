@@ -34,62 +34,10 @@ session_start()
     </nav>
   </header>
   <div class="container">
-    <div id="routes" class="row">
-      <?php
-      $travel_id = $_GET['travel_id'];
-      $lastRouteNumber = 0;
-      if (empty($_GET['travel_id'])) {
-        echo ("不正な画面遷移です。ホーム画面へ戻ります。");
-        header("refresh:3;url=./home.php");
-      }
-
-      echo ("travel_id" . $_GET['travel_id']);
-
-      //eventテーブルを確認して、ルートが登録されているか確認している？
-      try {
-        $pdo = new PDO('mysql:host=localhost;dbname=travelmates;charset=utf8', 'root', 'root');
-        $stmt = $pdo->prepare('SELECT * FROM event WHERE travel_id = ? ORDER BY route_id ASC');
-        $stmt->execute([$travel_id]);
-        $routes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        if ($routes) {
-          $route_set = 999;
-          foreach ($routes as $route) {
-            $route_db = $route['route_id'];
-            $place = $route['place'];
-            $charge = $route['charge'];
-            $start = $route['start_datetime'];
-            $end = $route['end_datetime'];
-            $vehicle = $route['transport_id'];
-            if ($route_db == $route_set) {
-              echo "<div class='col-12 route' data-route-number='{$lastRouteNumber}'>
-                                <p>場所{$place}</p>                                
-                            ";
-            } else {
-              $lastRouteNumber += 1;
-              echo "<div class='col-12 route' data-route-number='{$lastRouteNumber}'>
-                                <p>ルート{$lastRouteNumber}</p>
-                                <p>場所{$place}</p>
-                            ";
-            }
-            $route_set = $route_db; //route_dbはデータベースから取得したルート番号 route_setは現在表示されている一番下のルート番号
-          }
-          if ($route_db == $route_set) {
-            echo "<button id='{$lastRouteNumber}' class='openModalButton'>予定を追加する</button></div>";
-          } else {
-            echo "<div>";
-          }
-        } else {
-          $lastRouteNumber = 0;
-          echo "<p>登録されているルートはありません。</p><br>";
-        }
-      } catch (PDOException $e) {
-        echo 'データベースエラー: ' . $e->getMessage();
-      }
-      ?>
 
       <?php
         //旅行データを取得して表示 作業者：平田
+        $travel_id = $_GET['travel_id'];
         require_once('dao/travel.php');
         $travel = new Travel();
         $travel_data = $travel->findTravelByTravelId($travel_id);
@@ -121,7 +69,7 @@ session_start()
 
         <!-- タブ1：移動 -->
         <form id="scheduleForm1" action="registerEvent.php" method="POST">
-          <input type="hidden" name="last_route_number" value="<?php echo $lastRouteNumber; ?>">
+          <input type="hidden" name="last_route_number" value="">
           <!--ルートナンバーをjavascriptからpostで受け取る-->
           <input type="hidden" id="routeNumberInput1" name="routeNumber" value="">
           <div id="modal-tab1" class="tab-content active">
@@ -170,7 +118,7 @@ session_start()
 
         <!-- タブ2：予定 -->
         <form id="scheduleForm2" action="registerEvent.php" method="POST">
-          <input type="hidden" name="last_route_number" value="<?php echo $lastRouteNumber; ?>">
+          <input type="hidden" name="last_route_number" value="">
           <input type="hidden" id="routeNumberInput2" name="routeNumber" value="">
           <div id="modal-tab2" class="tab-content">
             <div class="form-group">
@@ -200,8 +148,8 @@ session_start()
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="./scripts/header.js"></script>
   <script src="../app/scripts/addplan.js"></script>
+  <script src="./scripts/header.js"></script>
 </body>
 
 </html>
