@@ -24,36 +24,44 @@
                 $routes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 if ($routes) {
-                    $route_set = 999;
+                    $route_set = 0;
+                    $lastRouteNumber = 0; // 初期化
                     foreach ($routes as $route) {
                         $route_db = $route['route_id'];
-                        $place =$route['place'];
-                        $charge =$route['charge'];
+                        $place = $route['place'];
+                        $charge = $route['charge'];
                         $start = $route['start_datetime'];
                         $end = $route['end_datetime'];
                         $vehicle = $route['transport_id'];
-                        if($route_db == $route_set){
-                            echo "<div class='col-12 route' data-route-number='{$lastRouteNumber}'>
-                                <p>場所{$place}</p>                                
+                
+                        if ($route_db != $route_set) {
+                            // 前のルートを閉じる (初回はスキップされる)
+                            if ($lastRouteNumber > 0) {
+                                echo "<button id='{$lastRouteNumber}' class='openModalButton'>予定を追加する</button></div>"; 
+                            }
+                
+                            // 新しいルートを開始
+                            $lastRouteNumber++;
+                            echo "
+                                <div class='col-12 route' data-route-number='{$lastRouteNumber}'>
+                                    <p>ルート{$lastRouteNumber}</p>
+                                    <p>場所{$place}</p>
                             ";
-                        }else{
-                            $lastRouteNumber += 1;
-                            echo "<div class='col-12 route' data-route-number='{$lastRouteNumber}'>
-                                <p>ルート{$lastRouteNumber}</p>
-                                <p>場所{$place}</p>
-                            ";
+                        } else {
+                            // 同じルート内のデータを表示
+                            echo "<p>場所{$place}</p>";
                         }
-                        $route_set = $route_db;//route_dbはデータベースから取得したルート番号 route_setは現在表示されている一番下のルート番号
+                
+                        // 表示されたルート番号を更新
+                        $route_set = $route_db;
                     }
-                    if ($route_db == $route_set) {
-                        echo "<button id='{$lastRouteNumber}' class='openModalButton'>予定を追加する</button></div>";
-                    }else{
-                        echo "<div>";
-                    }
+                
+                    // 最後のルートを閉じる
+                    echo "<button id='{$lastRouteNumber}' class='openModalButton'>予定を追加する</button></div>";
                 } else {
-                    $lastRouteNumber = 0;
                     echo "<p>登録されているルートはありません。</p>";
                 }
+                
             } catch (PDOException $e) {
                 echo 'データベースエラー: ' . $e->getMessage();
             }
@@ -63,8 +71,6 @@
                 window.lastRouteNumber = <?php echo $lastRouteNumber; ?>;
             </script>
         </div>
-
-        <button id="addRouteButton" class="btn btn-primary mt-3">新しいルートを追加する</button>
 
         <!-- モーダル -->
         <div id="modal" class="hidden">
@@ -153,6 +159,7 @@
             </div>
         </div>
     </div>
+    <button id="addRouteButton" class="btn btn-primary mt-3">新しいルートを追加する</button>
 
     <script src="../app/scripts/addplan.js"></script>
 </body>
