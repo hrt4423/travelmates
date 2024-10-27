@@ -217,7 +217,7 @@ input{
 /* 親コンテナの高さ調整 */
 .container {
     height: 100vh;  /* ビューポート全体の高さを使用 */
-    overflow: hidden;  /* 縦方向のスクロールを無効化 */
+    /*overflow: hidden;  /* 縦方向のスクロールを無効化 */
     display: flex;
     flex-direction: column;
 }

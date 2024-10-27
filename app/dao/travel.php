@@ -7,6 +7,8 @@
       $connect = new Connection();
       $this->pdo = $connect->getPdo();
     }
+    
+    //名前を変更したい
     public function getTravelTitle($travel_id) {
         $sql = "SELECT title FROM travel";
         $ps = $this->pdo->prepare($sql);

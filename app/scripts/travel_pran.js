@@ -1,33 +1,39 @@
 // モーダルとボタンの要素を取得
 var modal = document.getElementById('modal');
-var btn = document.getElementById('openModal');
 var span = document.getElementById('closeModal');
 
-// ボタンをクリックしたときにモーダルを開く
-btn.onclick = function() {
-    modal.className = 'show';
-}
+var btn = document.getElementsByClassName('openModal');
+//ボタンが複数ある場合があるので、配列に変換
+const array = Array.prototype.slice.call(btn);
+
+// ボタンをクリックしたときにモーダルを表示
+//ボタンが複数ある場合があるので、forEachで回す
+array.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+        modal.className = 'show';
+    });
+});
 
 // × をクリックしたときにモーダルを閉じる
-span.onclick = function() {
+span.onclick = function () {
     modal.className = 'hidden';
 }
 
 // モーダルの外側をクリックしたときにモーダルを閉じる
-window.onclick = function(event) {
+window.onclick = function (event) {
     if (event.target == modal) {
         modal.className = 'hidden';
     }
 }
 
 // タブの切り替え
-document.querySelectorAll('.tab').forEach(function(tab) {
-    tab.addEventListener('click', function(event) {
+document.querySelectorAll('.tab').forEach(function (tab) {
+    tab.addEventListener('click', function (event) {
         // すべてのタブとコンテンツを非アクティブにする
-        document.querySelectorAll('.tab').forEach(function(t) {
+        document.querySelectorAll('.tab').forEach(function (t) {
             t.classList.remove('active');
         });
-        document.querySelectorAll('.tab-content').forEach(function(content) {
+        document.querySelectorAll('.tab-content').forEach(function (content) {
             content.classList.remove('active');
         });
 
