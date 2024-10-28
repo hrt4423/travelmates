@@ -1,0 +1,2 @@
+ALTER TABLE `event` CHANGE `event_detail` `detail` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL;
+ALTER TABLE `event` ADD `departure_place` VARCHAR(50) NULL AFTER `detail`, ADD `arrival_place` VARCHAR(50) NULL AFTER `departure_place`;

@@ -19,5 +19,9 @@
         $e->getMessage();
       }
     }
+
+    public function registerTransport() {
+      
+    }
   }
 ?>

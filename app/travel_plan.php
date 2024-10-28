@@ -51,6 +51,8 @@ session_start()
     echo ("タイトル：" . $travel_data['title'] . "<br>");
     echo ("作成者ID：" . $travel_data['management_id'] . "<br>");
     echo ("<hr>");
+    echo date("Y-m-dTh:m");
+    //2017-06-01T08:30
 
 
     require_once('dao/event.php');
@@ -59,6 +61,10 @@ session_start()
 
 
     ?>
+
+    <form action="./registerTransportation.php" method="POST">
+      <button type="submit">送信</button>
+    </form>
 
     <div class="row">
       <div class="col-4">
@@ -73,7 +79,7 @@ session_start()
             <b><?= $event_type = $event['is_transport'] ? '移動' : '予定' ?></b>
             <p>時間：<?= $event['start_datetime'] ?> ~ <?= $event['end_datetime'] ?></p>
             <p>場所：<?= $event['place'] ?></p>
-            <p>詳細：<?= $event['event_detail'] ?></p>
+            <p>詳細：<?= $event['detail'] ?></p>
             <p>料金：<?= $event['charge'] ?></p>
             <hr>
         <?php
@@ -95,7 +101,7 @@ session_start()
             <b><?= $event_type = $event['is_transport'] ? '移動' : '予定' ?></b>
             <p>時間：<?= $event['start_datetime'] ?> ~ <?= $event['end_datetime'] ?></p>
             <p>場所：<?= $event['place'] ?></p>
-            <p>詳細：<?= $event['event_detail'] ?></p>
+            <p>詳細：<?= $event['detail'] ?></p>
             <p>料金：<?= $event['charge'] ?></p>
             <hr>
         <?php
@@ -105,11 +111,6 @@ session_start()
 
       </div>
     </div>
-
-
-
-
-
 
     <script>
       // PHPの変数をJavaScriptに渡す
@@ -128,11 +129,10 @@ session_start()
         <div class="tab" data-target="modal-tab-schedule">予定</div>
       </div>
       <!-- タブ１の内容 -->
-      <div id="modal-tab-transport" class="tab-content active">
-        <div class="money">
+      <form id="modal-tab-transport" class="tab-content active" action="./registerTransportation.php" method="POST">
+        <div class="charge">
           <h2>料金</h2>
-          <input type="text" style="width:35%;" name="budget">円
-
+          <input type="number" style="width:35%;" name="budget">円
         </div>
         <hr>
         <div class="place-time-container">
@@ -142,8 +142,7 @@ session_start()
           </div>
           <div class="time">
             <h2>出発時刻</h2>
-            <input type="text" style="width:35%;" name="hour"> :
-            <input type="text" style="width:35%;" name="minute">
+            <input type="datetime-local" name="start_datetime" value=<?=date("Y-m-d\TH:i");?>>
           </div>
         </div>
         <div class="arrive-time-container">
@@ -153,21 +152,23 @@ session_start()
           </div>
           <div class="arrive-time">
             <h2>到着時刻</h2>
-            <input type="text" style="width:35%;" name="hour"> :
-            <input type="text" style="width:35%;" name="minute">
+            <input type="datetime-local" name="end_datetime" value=<?=date("Y-m-d\TH:i");?>>
           </div>
         </div>
         <hr>
         <div class="transportation">
           <h2>移動手段</h2>
-          <select name='vehicle'>
-            <option value='car'></option>
+          <select name='transportation'>
             <option value='car'>車</option>
+            <option value='train'>電車</option>
+            <option value='bus'>バス</option>
+            <option value='walk'>徒歩</option>
             <option value='airplane'>飛行機</option>
             <option value='ferry'>フェリー</option>
           </select>
         </div>
-      </div>
+        <button class="submit" type="button">移動の予定を追加</button>
+      </form>
 
       <!-- タブ2の内容 -->
       <div id="modal-tab-schedule" class="tab-content">
@@ -186,8 +187,8 @@ session_start()
           <h2>予定</h2>
           <textarea name="plans" cols="25" rows="3"></textarea>
         </div>
+        <button class="submit" type="button">予定を追加</button>
       </div>
-      <button class="submit" type="button">スケジュールを追加</button>
     </div>
   </div>
 
