@@ -65,6 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // 挿入されたtravel_idをセッションに保存
         $_SESSION['travel_id'] = $travel_id;
+        $_SESSION['travel_name'] = $title;
 
         // 正常に追加されたら次のページにリダイレクト
         header("Location: addplan.php");

@@ -10,59 +10,88 @@
 </head>
 
 <body>
+    <div class = "travel_name"><?php session_start(); $travel_name = $_SESSION['travel_name']; echo $travel_name;?></div>
     <div class="container">
-        <div id="routes" class="row">
-            <?php
-            session_start();
-            $travel_id = $_SESSION['travel_id'];
+    <div id="routes" class="row">
+    <?php
+
+    try {
+        $travel_id = $_SESSION['travel_id'];
+        $pdo = new PDO('mysql:host=localhost;dbname=travelmates;charset=utf8', 'root', 'root');
+        $stmt = $pdo->prepare('SELECT * FROM event WHERE travel_id = ? ORDER BY route_id ASC');
+        $stmt->execute([$travel_id]);
+        $routes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($routes) {
             $lastRouteNumber = 0;
+            $route_set = 999;
+            $sumRouteCharge = 0;
 
-            try {
-                $pdo = new PDO('mysql:host=localhost;dbname=travelmates;charset=utf8', 'root', 'root');
-                $stmt = $pdo->prepare('SELECT * FROM event WHERE travel_id = ? ORDER BY route_id ASC');
-                $stmt->execute([$travel_id]);
-                $routes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($routes as $route) {
+                $route_db = $route['route_id'];
+                $place = $route['place'];
+                $event_detail = $route['event_detail'];
+                $start_datetime = $route['start_datetime'];
+                $end_datetime = $route['end_datetime'];
+                $form_check = isset($_POST['is_transport']) ? $_POST['is_transport'] : 0;
+                $start = $route['place'];
+                $end = $route['event_detail'];
+                $charge = $route['charge'];
+                // 日時を「時:分」形式に変換
+                $start_datetime = (new DateTime($start_datetime))->format('H:i');
+                $end_datetime = (new DateTime($end_datetime))->format('H:i');
 
-                if ($routes) {
-                    $route_set = 999;
-                    foreach ($routes as $route) {
-                        $route_db = $route['route_id'];
-                        $place =$route['place'];
-                        $charge =$route['charge'];
-                        $start = $route['start_datetime'];
-                        $end = $route['end_datetime'];
-                        $vehicle = $route['transport_id'];
-                        if($route_db == $route_set){
-                            echo "<div class='col-12 route' data-route-number='{$lastRouteNumber}'>
-                                <p>場所{$place}</p>                                
-                            ";
-                        }else{
-                            $lastRouteNumber += 1;
-                            echo "<div class='col-12 route' data-route-number='{$lastRouteNumber}'>
-                                <p>ルート{$lastRouteNumber}</p>
-                                <p>場所{$place}</p>
-                            ";
-                        }
-                        $route_set = $route_db;//route_dbはデータベースから取得したルート番号 route_setは現在表示されている一番下のルート番号
+                // 新しいルートの場合は新しい<div>を作成
+                if ($route_db != $route_set) {
+                    if ($route_set != 999) {
+                        // 前のルートを閉じるとき、最後にボタンを追加して閉じる
+                        echo "<button id='{$lastRouteNumber}' class='openModalButton'>予定を追加する</button>";
+                        echo "<div class='sumRouteCharge'>合計金額: {$sumRouteCharge}円</div>";
+                        echo "</div>"; // ルート終了の閉じタグ
+                        $sumRouteCharge = 0;
                     }
-                    if ($route_db == $route_set) {
-                        echo "<button id='{$lastRouteNumber}' class='openModalButton'>予定を追加する</button></div>";
-                    }else{
-                        echo "<div>";
-                    }
-                } else {
-                    $lastRouteNumber = 0;
-                    echo "<p>登録されているルートはありません。</p>";
+
+                    $lastRouteNumber++;
+                    echo "<div class='col-12 route' data-route-number='{$lastRouteNumber}'>
+                            <div class='lastRouteNumber'><p>ルート{$lastRouteNumber}</p></div>";
                 }
-            } catch (PDOException $e) {
-                echo 'データベースエラー: ' . $e->getMessage();
+                $sumRouteCharge += $charge;
+                // データの内容に応じて表示する内容を切り替える
+                if ($form_check == 1) {
+                    echo "
+                        <div class='start'>{$start}</div>
+                        <div class='button'><button name='button'>編集</button></div>
+                        <div class='start_datetime'>{$start_datetime}発</div>
+                        <div class='end'>{$end}</div>
+                        <div class='end_datetime'>{$end_datetime}着</div>";
+                } else {
+                    echo "
+                        <div class='place'>{$place}</div>
+                        <div class='start_datetime'>{$start_datetime}着</div>";
+                }
+
+                // 現在のルート番号を次の比較用に保存
+                $route_set = $route_db;
             }
-            ?>
-            <script>
-                // PHPの変数をJavaScriptに渡す
-                window.lastRouteNumber = <?php echo $lastRouteNumber; ?>;
-            </script>
-        </div>
+
+            // 最後のルートの閉じタグとボタンを追加
+            echo "<button id='{$lastRouteNumber}' class='openModalButton'>予定を追加する</button>
+                  <div class='sumRouteCharge'>合計金額: {$sumRouteCharge}円</div>
+            ";
+            echo "</div>"; // 最後のルートを閉じる
+        } else {
+            echo "<p>登録されているルートはありません。</p>";
+        }
+    } catch (PDOException $e) {
+        echo 'データベースエラー: ' . $e->getMessage();
+    }
+    ?>
+    <script>
+        // PHPの変数をJavaScriptに渡す
+        window.lastRouteNumber = <?php echo $lastRouteNumber; ?>;
+    </script>
+</div>
+
 
         <button id="addRouteButton" class="btn btn-primary mt-3">新しいルートを追加する</button>
 

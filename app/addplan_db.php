@@ -39,13 +39,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pdo = new PDO($dsn, $username, $password);
 
         try {
-            $is_transport = true;
+            $is_transport = 1;
 
             // エラーモードを例外モードに設定
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             // SQLクエリを準備
-            $stmt = $pdo->prepare('INSERT INTO event (route_id, travel_id, is_transport, charge, start_datetime, end_datetime, transport_id) VALUES (:route_id, :travel_id, :is_transport, :charge, :start_datetime, :end_datetime, :transport_id)');
+            $stmt = $pdo->prepare('INSERT INTO event (route_id, travel_id, is_transport, charge, start_datetime, end_datetime, transport_id, place, event_detail) VALUES (:route_id, :travel_id, :is_transport, :charge, :start_datetime, :end_datetime, :transport_id, :place, :event_detail)');
 
             // 値をバインドしてSQLを実行
             $stmt->bindValue(':route_id', $button_number, PDO::PARAM_INT);
@@ -55,6 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->bindValue(':start_datetime', $start_datetime, PDO::PARAM_STR);
             $stmt->bindValue(':end_datetime', $end_datetime, PDO::PARAM_STR);
             $stmt->bindValue(':transport_id', $vehicle, PDO::PARAM_INT);
+            $stmt->bindValue(':place', $start, PDO::PARAM_STR);  // データ型を修正
+            $stmt->bindValue(':event_detail', $end, PDO::PARAM_STR);  // データ型を修正
 
             // SQLを実行してデータを挿入
             $stmt->execute();
@@ -68,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } else{
         // タブ2（予定）のデータが送信されたかどうか確認
-        $is_transport = false;
+        $is_transport = 0;
         $place = $_POST['place'];
         $plan_detil = $_POST['plan_detil'];
         $plan_hour = $_POST['plan_hour'];
