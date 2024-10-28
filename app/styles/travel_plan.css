@@ -84,7 +84,7 @@
 .tab-content.active {
     display: block;
 }
-#modal-tab1{
+#modal-tab-transport{
     border: 1px solid #0b0b0b;
 }
 /*料金入力のスタイル*/
@@ -103,17 +103,17 @@
     margin-bottom: 5px;
 }
 /*テキストボックスのスタイル*/
-#modal-tab1 .place input {
+#modal-tab-transport .place input {
     margin-left: 35px;
 }
 /*要素を隣にする*/
-#modal-tab1 .place-time-container {
+#modal-tab-transport .place-time-container {
     display: flex;
     gap: 20px; /* 隣接する要素間のスペースを設定（必要に応じて調整） */
 }
 
-#modal-tab1 .place, 
-#modal-tab1 .time {
+#modal-tab-transport .place, 
+#modal-tab-transport .time {
     flex: 1;
 }
 /*時間のスタイル*/
@@ -122,16 +122,16 @@
     margin-left: 40px;
     margin-bottom: 5px;
 }
-#modal-tab1 .arrive-time-container {
+#modal-tab-transport .arrive-time-container {
     display: flex;
     gap: 20px; /* 隣接する要素間のスペースを設定（必要に応じて調整） */
 }
 /*到着時間*/
-#modal-tab1 .arrive-place, 
-#modal-tab1 .arrive-time {
+#modal-tab-transport .arrive-place, 
+#modal-tab-transport .arrive-time {
     flex: 1;
 }
-#modal-tab1 .arrive-place input {
+#modal-tab-transport .arrive-place input {
     margin-left: 35px;
 }
 .arrive-place h2{
@@ -164,7 +164,7 @@ button.submit {
     font-size: 16px; /* フォントサイズを16pxに設定 */
 }
 /*タブ２*/
-#modal-tab2{
+#modal-tab-schedule{
     border: 1px solid #0b0b0b;
 }
 .addplace{

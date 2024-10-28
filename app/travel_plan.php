@@ -56,8 +56,8 @@ session_start()
     require_once('dao/event.php');
     $event = new Event();
     $event_list = $event->searchEventByTravelId($travel_id);
-    
-    
+
+
     ?>
 
     <div class="row">
@@ -65,20 +65,20 @@ session_start()
         <p>ルート１</p>
         <button class='openModal'>予定を追加する</button>
 
-        <?php 
-          foreach($event_list as $event): 
-            if($event['route_id'] == 0):
+        <?php
+        foreach ($event_list as $event):
+          if ($event['route_id'] == 0):
         ?>
-          <p>route_id:<?=$event['route_id']?></p>
-          <b><?= $event_type = $event['is_transport'] ? '移動' : '予定' ?></b>
-          <p>時間：<?=$event['start_datetime']?> ~ <?=$event['end_datetime']?></p>
-          <p>場所：<?=$event['place']?></p>
-          <p>詳細：<?=$event['event_detail']?></p>
-          <p>料金：<?=$event['charge']?></p>
-          <hr>
-        <?php 
-            endif;
-          endforeach; 
+            <p>route_id:<?= $event['route_id'] ?></p>
+            <b><?= $event_type = $event['is_transport'] ? '移動' : '予定' ?></b>
+            <p>時間：<?= $event['start_datetime'] ?> ~ <?= $event['end_datetime'] ?></p>
+            <p>場所：<?= $event['place'] ?></p>
+            <p>詳細：<?= $event['event_detail'] ?></p>
+            <p>料金：<?= $event['charge'] ?></p>
+            <hr>
+        <?php
+          endif;
+        endforeach;
         ?>
 
       </div>
@@ -87,20 +87,20 @@ session_start()
         <p>ルート２</p>
         <button class='openModal'>予定を追加する</button>
 
-        <?php 
-          foreach($event_list as $event): 
-            if($event['route_id'] == 1):
+        <?php
+        foreach ($event_list as $event):
+          if ($event['route_id'] == 1):
         ?>
-          <p>route_id:<?=$event['route_id']?></p>
-          <b><?= $event_type = $event['is_transport'] ? '移動' : '予定' ?></b>
-          <p>時間：<?=$event['start_datetime']?> ~ <?=$event['end_datetime']?></p>
-          <p>場所：<?=$event['place']?></p>
-          <p>詳細：<?=$event['event_detail']?></p>
-          <p>料金：<?=$event['charge']?></p>
-          <hr>
-        <?php 
-            endif;
-          endforeach; 
+            <p>route_id:<?= $event['route_id'] ?></p>
+            <b><?= $event_type = $event['is_transport'] ? '移動' : '予定' ?></b>
+            <p>時間：<?= $event['start_datetime'] ?> ~ <?= $event['end_datetime'] ?></p>
+            <p>場所：<?= $event['place'] ?></p>
+            <p>詳細：<?= $event['event_detail'] ?></p>
+            <p>料金：<?= $event['charge'] ?></p>
+            <hr>
+        <?php
+          endif;
+        endforeach;
         ?>
 
       </div>
@@ -115,95 +115,80 @@ session_start()
       // PHPの変数をJavaScriptに渡す
       window.lastRouteNumber = <?php echo $lastRouteNumber; ?>;
     </script>
-    
+
   </div>
 
-  <!-- モーダル -->
+  <!-- モーダルウィンドウ -->
   <div id="modal" class="hidden">
     <div id="modal-content">
       <span id="closeModal">&times;</span>
-
+      <!-- モーダル内のタブUI -->
       <div class="tab-container">
-        <div class="tab active" data-target="modal-tab1">移動</div>
-        <div class="tab" data-target="modal-tab2">予定</div>
+        <div class="tab active" data-target="modal-tab-transport">移動</div>
+        <div class="tab" data-target="modal-tab-schedule">予定</div>
+      </div>
+      <!-- タブ１の内容 -->
+      <div id="modal-tab-transport" class="tab-content active">
+        <div class="money">
+          <h2>料金</h2>
+          <input type="text" style="width:35%;" name="budget">円
+
+        </div>
+        <hr>
+        <div class="place-time-container">
+          <div class="place">
+            <h2>出発地</h2>
+            <input type="text" style="width:40%;" name="start">
+          </div>
+          <div class="time">
+            <h2>出発時刻</h2>
+            <input type="text" style="width:35%;" name="hour"> :
+            <input type="text" style="width:35%;" name="minute">
+          </div>
+        </div>
+        <div class="arrive-time-container">
+          <div class="arrive-place">
+            <h2>目的地</h2>
+            <input type="text" style="width:40%;" name="end">
+          </div>
+          <div class="arrive-time">
+            <h2>到着時刻</h2>
+            <input type="text" style="width:35%;" name="hour"> :
+            <input type="text" style="width:35%;" name="minute">
+          </div>
+        </div>
+        <hr>
+        <div class="transportation">
+          <h2>移動手段</h2>
+          <select name='vehicle'>
+            <option value='car'></option>
+            <option value='car'>車</option>
+            <option value='airplane'>飛行機</option>
+            <option value='ferry'>フェリー</option>
+          </select>
+        </div>
       </div>
 
-      <!-- タブ1：移動 -->
-      <form id="scheduleForm1" action="registerEvent.php" method="POST">
-        <input type="hidden" name="last_route_number" value="">
-        <!--ルートナンバーをjavascriptからpostで受け取る-->
-        <input type="hidden" id="routeNumberInput1" name="routeNumber" value="">
-        <div id="modal-tab1" class="tab-content active">
-          <div class="form-group">
-            <label for="budget">料金</label>
-            <input type="text" class="form-control" name="budget" placeholder="円">
-          </div>
-          <div class="form-group">
-            <label>出発地</label>
-            <input type="text" class="form-control" name="start">
-          </div>
-          <div class="form-row">
-            <div class="col">
-              <label>出発時刻</label>
-              <input type="text" class="form-control" name="start_hour" placeholder="時">
-            </div>
-            <div class="col">
-              <input type="text" class="form-control" name="start_minute" placeholder="分">
-            </div>
-          </div>
-          <div class="form-group mt-3">
-            <label>目的地</label>
-            <input type="text" class="form-control" name="end">
-          </div>
-          <div class="form-row">
-            <div class="col">
-              <label>到着時刻</label>
-              <input type="text" class="form-control" name="end_hour" placeholder="時">
-            </div>
-            <div class="col">
-              <input type="text" class="form-control" name="end_minute" placeholder="分">
-            </div>
-          </div>
-          <div class="form-group mt-3">
-            <label>移動手段</label>
-            <select class="form-control" name="vehicle" required>
-              <option value="" disabled selected>選択してください</option>
-              <option value="1">車</option>
-              <option value="2">飛行機</option>
-              <option value="3">フェリー</option>
-            </select>
-          </div>
-          <button type="submit" class="btn btn-success mt-3">スケジュールを追加</button>
+      <!-- タブ2の内容 -->
+      <div id="modal-tab-schedule" class="tab-content">
+        <div class="addplace">
+          <h2>場所を追加</h2>
+          <input type="text" style="width:35%;" name="place">
         </div>
-      </form>
-
-      <!-- タブ2：予定 -->
-      <form id="scheduleForm2" action="registerEvent.php" method="POST">
-        <input type="hidden" name="last_route_number" value="">
-        <input type="hidden" id="routeNumberInput2" name="routeNumber" value="">
-        <div id="modal-tab2" class="tab-content">
-          <div class="form-group">
-            <label>場所を追加</label>
-            <input type="text" class="form-control" name="place">
-          </div>
-          <div class="form-group mt-3">
-            <label>詳細内容</label>
-            <input type="text" class="form-control" name="plan_detil">
-          </div>
-          <div class="form-row">
-            <div class="col">
-              <label>到着時刻</label>
-              <input type="text" class="form-control" name="plan_hour" placeholder="時">
-            </div>
-            <div class="col">
-              <input type="text" class="form-control" name="plan_minute" placeholder="分">
-            </div>
-          </div>
-          <button type="submit" class="btn btn-success mt-3">スケジュールを追加</button>
+        <hr>
+        <div class="addtime">
+          <h2>時刻</h2>
+          <input type="text" style="width:25%;" name="time"> :
+          <input type="text" style="width:25%;" name="time">
         </div>
-      </form>
+        <hr>
+        <div class="addplans">
+          <h2>予定</h2>
+          <textarea name="plans" cols="25" rows="3"></textarea>
+        </div>
+      </div>
+      <button class="submit" type="button">スケジュールを追加</button>
     </div>
-  </div>
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
