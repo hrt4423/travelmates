@@ -8,9 +8,12 @@ const array = Array.prototype.slice.call(btn);
 
 // ボタンをクリックしたときにモーダルを表示
 //ボタンが複数ある場合があるので、forEachで回す
-array.forEach(function (btn) {
-        btn.addEventListener('click', function () {
+array.forEach((btn, index) => {
+    console.log(index); // インデックスを表示
+    btn.addEventListener('click', () => {
         modal.className = 'show';
+        //ルート番号を割り当て
+        document.getElementById('route-number').value = index;
     });
 });
 

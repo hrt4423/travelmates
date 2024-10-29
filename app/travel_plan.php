@@ -40,7 +40,6 @@ session_start()
     $travel_id = $_SESSION['travel_id'];
     $lastRouteNumber = 0;
 
-
     //旅行データを取得して表示
     $travel_id = $_GET['travel_id'];
     require_once('dao/travel.php');
@@ -51,20 +50,12 @@ session_start()
     echo ("タイトル：" . $travel_data['title'] . "<br>");
     echo ("作成者ID：" . $travel_data['management_id'] . "<br>");
     echo ("<hr>");
-    echo date("Y-m-dTh:m");
-    //2017-06-01T08:30
-
 
     require_once('dao/event.php');
     $event = new Event();
     $event_list = $event->searchEventByTravelId($travel_id);
 
-
     ?>
-
-    <form action="./registerTransportation.php" method="POST">
-      <button type="submit">送信</button>
-    </form>
 
     <div class="row">
       <div class="col-4">
@@ -132,13 +123,13 @@ session_start()
       <form id="modal-tab-transport" class="tab-content active" action="./registerTransportation.php" method="POST">
         <div class="charge">
           <h2>料金</h2>
-          <input type="number" style="width:35%;" name="budget">円
+          <input type="number" style="width:35%;" name="charge">円
         </div>
         <hr>
         <div class="place-time-container">
           <div class="place">
             <h2>出発地</h2>
-            <input type="text" style="width:40%;" name="start">
+            <input type="text" style="width:40%;" name="departure_place">
           </div>
           <div class="time">
             <h2>出発時刻</h2>
@@ -148,7 +139,7 @@ session_start()
         <div class="arrive-time-container">
           <div class="arrive-place">
             <h2>目的地</h2>
-            <input type="text" style="width:40%;" name="end">
+            <input type="text" style="width:40%;" name="arrival_place">
           </div>
           <div class="arrive-time">
             <h2>到着時刻</h2>
@@ -167,7 +158,10 @@ session_start()
             <option value='ferry'>フェリー</option>
           </select>
         </div>
-        <button class="submit" type="button">移動の予定を追加</button>
+        <input type="hidden" name="travel_id" value="<?= $travel_id ?>">
+        <input type="hidden" name="route_id" value="" id="route-number">
+        <input type="hidden" name="is_transport" value="1" >
+        <button type="submit" class="submit">移動の予定を追加</button>
       </form>
 
       <!-- タブ2の内容 -->
@@ -187,7 +181,7 @@ session_start()
           <h2>予定</h2>
           <textarea name="plans" cols="25" rows="3"></textarea>
         </div>
-        <button class="submit" type="button">予定を追加</button>
+        <button class="submit" type="submit">予定を追加</button>
       </div>
     </div>
   </div>
