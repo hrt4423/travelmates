@@ -1,5 +1,6 @@
 <?php
 session_start()
+//ルート追加機能は未実装
 ?>
 
 <!DOCTYPE html>
@@ -54,6 +55,27 @@ session_start()
     require_once('dao/event.php');
     $event = new Event();
     $event_list = $event->searchEventByTravelId($travel_id);
+    //イベントをルートで分ける
+    //現在はルートが2つのみと仮定
+    //実際はルートが2つ以上になる可能性もあるため、SQLで処理したほうが良いと思う
+    $event_list_route_1 = [];
+    $event_list_route_2 = [];
+    foreach ($event_list as $event) {
+      if ($event['route_id'] == 0) {
+        $event_list_route_1[] = $event;
+      } else {
+        $event_list_route_2[] = $event;
+      }
+    }
+
+    function chargeSum($event_list)
+    {
+      $sum = 0;
+      foreach ($event_list as $event) {
+        $sum += $event['charge'];
+      }
+      return $sum;
+    }
 
     ?>
 
@@ -63,53 +85,49 @@ session_start()
         <button class='openModal'>予定を追加する</button>
         <div class="event-list">
           <?php
-          foreach ($event_list as $event):
-            if ($event['route_id'] == 0):
+          foreach ($event_list_route_1 as $event):
+            if ($event['is_transport'] == 1):
           ?>
-              <p>route_id:<?= $event['route_id'] ?></p>
-              <b><?= $event_type = $event['is_transport'] ? '移動' : '予定' ?></b>
-              <p>時間：<?= $event['start_datetime'] ?> ~ <?= $event['end_datetime'] ?></p>
-              <p>場所：<?= $event['place'] ?></p>
-              <p>詳細：<?= $event['detail'] ?></p>
-              <p>料金：<?= $event['charge'] ?></p>
-              <hr>
+            <p><b>発</b> <?= $event['start_datetime'] ?> : <?= $event['departure_place'] ?></p>
+            <p><b>着</b> <?= $event['end_datetime'] ?> : <?= $event['arrival_place'] ?></p>
+            <p>料金：<?= $event['charge'] ?>円</p>
+            <hr>
+          <?php elseif ($event['is_transport'] == 0): ?>
+            <p><?= $event['start_datetime'] . "：" . $event['place'] ?>
+            <p>詳細：<?= $event['detail'] ?></p>
+            <hr>
           <?php
             endif;
           endforeach;
           ?>
         </div>
-
+        <b>合計：<?=chargeSum($event_list_route_1)?>円</b>
       </div>
 
       <div class="col-4">
-        <p>ルート２</p>
+      <p>ルート２</p>
         <button class='openModal'>予定を追加する</button>
         <div class="event-list">
           <?php
-          foreach ($event_list as $event):
-            if ($event['route_id'] == 1):
+          foreach ($event_list_route_2 as $event):
+            if ($event['is_transport'] == 1):
           ?>
-              <p>route_id:<?= $event['route_id'] ?></p>
-              <b><?= $event_type = $event['is_transport'] ? '移動' : '予定' ?></b>
-              <p>時間：<?= $event['start_datetime'] ?> ~ <?= $event['end_datetime'] ?></p>
-              <p>場所：<?= $event['place'] ?></p>
-              <p>詳細：<?= $event['detail'] ?></p>
-              <p>料金：<?= $event['charge'] ?></p>
-              <hr>
+            <p><b>発</b> <?= $event['start_datetime'] ?> : <?= $event['departure_place'] ?></p>
+            <p><b>着</b> <?= $event['end_datetime'] ?> : <?= $event['arrival_place'] ?></p>
+            <p>料金：<?= $event['charge'] ?>円</p>
+            <hr>
+          <?php elseif ($event['is_transport'] == 0): ?>
+            <p><?= $event['start_datetime'] . "：" . $event['place'] ?>
+            <p>詳細：<?= $event['detail'] ?></p>
+            <hr>
           <?php
             endif;
           endforeach;
           ?>
         </div>
-
-
+        <b>合計：<?=chargeSum($event_list_route_2)?>円</b>
       </div>
     </div>
-
-    <script>
-      // PHPの変数をJavaScriptに渡す
-      window.lastRouteNumber = <?php echo $lastRouteNumber; ?>;
-    </script>
 
   </div>
 
