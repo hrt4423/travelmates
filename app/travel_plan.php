@@ -159,13 +159,14 @@ session_start()
           </select>
         </div>
         <input type="hidden" name="travel_id" value="<?= $travel_id ?>">
-        <input type="hidden" name="route_id" value="" id="route-number">
+        <!--valueはjsで指定-->
+        <input type="hidden" name="route_id" id="tab-transportation-route-number" value="" >
         <input type="hidden" name="is_transport" value="1" >
         <button type="submit" class="submit">移動の予定を追加</button>
       </form>
 
       <!-- タブ2の内容 -->
-      <div id="modal-tab-schedule" class="tab-content">
+      <form id="modal-tab-schedule" class="tab-content" action="./registerItinerary.php" method="POST">
         <div class="addplace">
           <h2>場所を追加</h2>
           <input type="text" style="width:35%;" name="place">
@@ -173,16 +174,19 @@ session_start()
         <hr>
         <div class="addtime">
           <h2>時刻</h2>
-          <input type="text" style="width:25%;" name="time"> :
-          <input type="text" style="width:25%;" name="time">
+          <input type="datetime-local" name="start_datetime" value=<?=date("Y-m-d\TH:i");?>>
         </div>
         <hr>
         <div class="addplans">
           <h2>予定</h2>
-          <textarea name="plans" cols="25" rows="3"></textarea>
+          <textarea name="detail" cols="25" rows="3"></textarea>
         </div>
+        <input type="hidden" name="travel_id" value="<?= $travel_id ?>">
+        <!--valueはjsで指定-->
+        <input type="hidden" name="route_id" id="tab-itinerary-route-number" value="">
+        <input type="hidden" name="is_transport" value="0" >
         <button class="submit" type="submit">予定を追加</button>
-      </div>
+      </form>
     </div>
   </div>
 

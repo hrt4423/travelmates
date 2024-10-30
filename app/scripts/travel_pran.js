@@ -13,7 +13,8 @@ array.forEach((btn, index) => {
     btn.addEventListener('click', () => {
         modal.className = 'show';
         //ルート番号を割り当て
-        document.getElementById('route-number').value = index;
+        document.getElementsById('tab-transportation-route-number').value = index;
+        document.getElementsById('tab-itinerary-route-number').value = index;
     });
 });
 

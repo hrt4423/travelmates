@@ -20,6 +20,24 @@
       }
     }
 
+    public function registerItineraray(array $post) {
+      $sql = "INSERT INTO event 
+        (travel_id, route_id, is_transport, start_datetime, place, detail) values 
+        (:travel_id, :route_id, :is_transport, :start_datetime, :place, :detail)";
+      $ps = $this->pdo->prepare($sql);
+      $ps->bindValue(':travel_id', $post['travel_id']);
+      $ps->bindValue(':route_id', $post['route_id']);
+      $ps->bindValue(':is_transport', $post['is_transport']);
+      $ps->bindValue(':start_datetime', $post['start_datetime']);
+      $ps->bindValue(':place', $post['place']);
+      $ps->bindValue(':detail', $post['detail']);
+      try {
+        $ps->execute();
+      } catch (Exception $e) {
+        return $e->getMessage();
+      }
+    }
+
     public function registerTransport(array $post) {
       $sql = "INSERT INTO event (
         travel_id, 
