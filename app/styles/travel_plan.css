@@ -231,3 +231,10 @@ input{
     background-color: #bbb;  /* スクロールバーの色 */
     border-radius: 4px;
 }
+
+.event-list {
+    height: 500px;
+    overflow:scroll;
+}
+
+

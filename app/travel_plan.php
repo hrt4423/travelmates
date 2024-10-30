@@ -49,7 +49,7 @@ session_start()
     echo ("travel_id:" . $travel_data['travel_id'] . "<br>");
     echo ("タイトル：" . $travel_data['title'] . "<br>");
     echo ("作成者ID：" . $travel_data['management_id'] . "<br>");
-    echo ("<hr>");
+    //echo ("<hr>");
 
     require_once('dao/event.php');
     $event = new Event();
@@ -61,44 +61,47 @@ session_start()
       <div class="col-4">
         <p>ルート１</p>
         <button class='openModal'>予定を追加する</button>
-
-        <?php
-        foreach ($event_list as $event):
-          if ($event['route_id'] == 0):
-        ?>
-            <p>route_id:<?= $event['route_id'] ?></p>
-            <b><?= $event_type = $event['is_transport'] ? '移動' : '予定' ?></b>
-            <p>時間：<?= $event['start_datetime'] ?> ~ <?= $event['end_datetime'] ?></p>
-            <p>場所：<?= $event['place'] ?></p>
-            <p>詳細：<?= $event['detail'] ?></p>
-            <p>料金：<?= $event['charge'] ?></p>
-            <hr>
-        <?php
-          endif;
-        endforeach;
-        ?>
+        <div class="event-list">
+          <?php
+          foreach ($event_list as $event):
+            if ($event['route_id'] == 0):
+          ?>
+              <p>route_id:<?= $event['route_id'] ?></p>
+              <b><?= $event_type = $event['is_transport'] ? '移動' : '予定' ?></b>
+              <p>時間：<?= $event['start_datetime'] ?> ~ <?= $event['end_datetime'] ?></p>
+              <p>場所：<?= $event['place'] ?></p>
+              <p>詳細：<?= $event['detail'] ?></p>
+              <p>料金：<?= $event['charge'] ?></p>
+              <hr>
+          <?php
+            endif;
+          endforeach;
+          ?>
+        </div>
 
       </div>
 
       <div class="col-4">
         <p>ルート２</p>
         <button class='openModal'>予定を追加する</button>
+        <div class="event-list">
+          <?php
+          foreach ($event_list as $event):
+            if ($event['route_id'] == 1):
+          ?>
+              <p>route_id:<?= $event['route_id'] ?></p>
+              <b><?= $event_type = $event['is_transport'] ? '移動' : '予定' ?></b>
+              <p>時間：<?= $event['start_datetime'] ?> ~ <?= $event['end_datetime'] ?></p>
+              <p>場所：<?= $event['place'] ?></p>
+              <p>詳細：<?= $event['detail'] ?></p>
+              <p>料金：<?= $event['charge'] ?></p>
+              <hr>
+          <?php
+            endif;
+          endforeach;
+          ?>
+        </div>
 
-        <?php
-        foreach ($event_list as $event):
-          if ($event['route_id'] == 1):
-        ?>
-            <p>route_id:<?= $event['route_id'] ?></p>
-            <b><?= $event_type = $event['is_transport'] ? '移動' : '予定' ?></b>
-            <p>時間：<?= $event['start_datetime'] ?> ~ <?= $event['end_datetime'] ?></p>
-            <p>場所：<?= $event['place'] ?></p>
-            <p>詳細：<?= $event['detail'] ?></p>
-            <p>料金：<?= $event['charge'] ?></p>
-            <hr>
-        <?php
-          endif;
-        endforeach;
-        ?>
 
       </div>
     </div>
