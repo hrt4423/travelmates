@@ -39,6 +39,7 @@
   <a href="./Create_new.php" class="btn btn-primary">新規作成</a>
   <hr>
   <?php
+    phpinfo();
     require_once('dao/travel.php');
     require_once('dao/member.php');
     $travel = new Travel();
