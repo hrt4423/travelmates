@@ -19,5 +19,16 @@
         return $e->getMessage();
       }
     }
+
+    public function fetchAllTransport() {
+      $sql = "SELECT * FROM transport";
+      $ps = $this->pdo->prepare($sql);
+      try {
+        $ps->execute();
+        return $ps->fetchAll(PDO::FETCH_ASSOC);
+      } catch (Exception $e) {
+        return $e->getMessage();
+      }
+    }
   }
 ?>
