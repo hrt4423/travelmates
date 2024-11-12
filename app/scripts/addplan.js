@@ -103,3 +103,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+// addplan.js
+
+// ドキュメントの読み込みが完了した後に実行
+document.addEventListener("DOMContentLoaded", function() {
+    const editButtons = document.querySelectorAll('.editButton button');
+    
+    editButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // ボタンからイベントIDを取得
+            const eventId = this.getAttribute('data-event-id');
+            const routeNumber = this.getAttribute('data-route-number');
+
+            // モーダルを表示
+            document.getElementById('modal').classList.remove('hidden');
+
+            // ルート番号をセット
+            document.getElementById(`routeNumberInput${routeNumber}`).value = routeNumber;
+
+            // event_idに値を設定
+            document.querySelector('input[name="event_id1"]').value = eventId;
+            document.querySelector('input[name="event_id2"]').value = eventId;
+        });
+    });
+
+    // モーダルを閉じるためのイベントリスナー
+    document.getElementById('closeModal').addEventListener('click', function() {
+        document.getElementById('modal').classList.add('hidden');
+    });
+});
+
