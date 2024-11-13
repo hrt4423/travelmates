@@ -9,6 +9,4 @@
   $event->registerItineraray($_POST);
 
   header('Location: ./travel_plan.php?travel_id=' . $_POST['travel_id']);
-
-
 ?>

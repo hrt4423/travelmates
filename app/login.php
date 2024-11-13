@@ -3,7 +3,10 @@
     session_start();
 
     // データベース接続
-    require_once 'db.php';
+    require_once ('dao/Connection.php');
+    $connection = new Connection();
+    $pdo = $connection->getPdo();
+
 
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = $_POST['email'];

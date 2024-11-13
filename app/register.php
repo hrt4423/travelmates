@@ -1,11 +1,16 @@
 <?php
+    // ini_set('display_errors', 1);
+    // ini_set('display_startup_errors', 1);
+    // error_reporting(E_ALL);
+
     // データベース接続
-    require_once 'db.php';
+    //require_once 'db.php';
+    require_once ('dao/Connection.php');
+    $connection = new Connection();
+    $pdo = $connection->getPdo();
 
     session_start();
 
-
-    if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $username = $_POST['username'];
         $email = $_POST['email'];
@@ -76,9 +81,5 @@
             echo "エラー: " . $e->getMessage();
             die();
         }
-    }else{
-        // POSTでない場合はsignup.phpにリダイレクト
-        header("Location: ./user_register.php");
-        exit;
-    }
+    
 ?>

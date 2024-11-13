@@ -11,22 +11,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['title'] = $_POST['title'];  // タイトルをセッションに保存
 
     // 画像がアップロードされた場合の処理
-    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-        $upload_dir = './assets/travel-image/';  // 画像を保存するディレクトリ
-        $upload_file = $upload_dir . basename($_FILES['image']['name']);  // 保存先ファイルパス
+    // if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+    //     $upload_dir = './assets/travel-image/';  // 画像を保存するディレクトリ
+    //     $upload_file = $upload_dir . basename($_FILES['image']['name']);  // 保存先ファイルパス
         
-        // ファイルを指定の場所に移動
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $upload_file)) {
-            // 画像パスをセッションに保存
-            $_SESSION['image_path'] = $upload_file;
-        } else {
-            echo "画像のアップロードに失敗しました。";
-            $_SESSION['image_path'] = './assets/travel-image/default.png';  // アップロード失敗時のデフォルト画像
-        }
-    } else {
-        // 画像がアップロードされていない場合やエラーがあった場合、デフォルト画像を使用
-        $_SESSION['image_path'] = './assets/travel-image/default.png';
-    }
+    //     // ファイルを指定の場所に移動
+    //     if (move_uploaded_file($_FILES['image']['tmp_name'], $upload_file)) {
+    //         // 画像パスをセッションに保存
+    //         $_SESSION['image_path'] = $upload_file;
+    //     } else {
+    //         echo "画像のアップロードに失敗しました。";
+    //         $_SESSION['image_path'] = './assets/travel-image/default.png';  // アップロード失敗時のデフォルト画像
+    //     }
+    // } else {
+    //     // 画像がアップロードされていない場合やエラーがあった場合、デフォルト画像を使用
+    //     $_SESSION['image_path'] = './assets/travel-image/default.png';
+    // }
 
     // セッションからデータ取得
     $title = $_SESSION['title'];
@@ -35,14 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $start_datetime = 0;  // 開始日時（本来は適切な値を設定する必要があります）
     $end_datetime = 0;    // 終了日時（本来は適切な値を設定する必要があります）
 
-    // データベース接続情報
-    $dsn = 'mysql:host=localhost;dbname=travelmates;charset=utf8';
-    $username = 'root';
-    $password = 'root';
+    require_once('dao/Connection.php');
+    $connection = new Connection();
+    $pdo = $connection->getPdo();
 
     try {
         // データベースに接続
-        $pdo = new PDO($dsn, $username, $password);
+        // $pdo = new PDO($dsn, $username, $password);
 
         // エラーモードを例外モードに設定
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

@@ -40,11 +40,11 @@ if (!isset($_SESSION['user_id'])) {
             <h2>タイトル</h2>
             <input type="text" name="title" placeholder="テキストを入力" required>
             
-            <h2>写真</h2>
+            <!-- <h2>写真</h2>
             <div class="image-preview">
                 <img id="image-preview" src="" alt="画像プレビュー">
             </div>
-            <input type="file" id="file-input" name="image" accept="image/*" required>
+            <input type="file" id="file-input" name="image" accept="image/*" required> -->
 
             <div class="button-container">
                 <button class="button" type="button">戻る</button>
@@ -54,20 +54,20 @@ if (!isset($_SESSION['user_id'])) {
     </main>
 
     <script>
-        document.getElementById('file-input').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            const imgElement = document.getElementById('image-preview');
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    imgElement.src = e.target.result;
-                    imgElement.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            } else {
-                imgElement.style.display = 'none';
-            }
-        });
+        // document.getElementById('file-input').addEventListener('change', function(event) {
+        //     const file = event.target.files[0];
+        //     const imgElement = document.getElementById('image-preview');
+        //     if (file) {
+        //         const reader = new FileReader();
+        //         reader.onload = function(e) {
+        //             imgElement.src = e.target.result;
+        //             imgElement.style.display = 'block';
+        //         };
+        //         reader.readAsDataURL(file);
+        //     } else {
+        //         imgElement.style.display = 'none';
+        //     }
+        // });
     </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
