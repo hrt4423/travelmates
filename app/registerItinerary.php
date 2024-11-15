@@ -6,7 +6,7 @@
 
   $_POST['transport_id'] = 1;
   //var_dump($_POST);
-  print $event->registerItineraray($_POST);
+  $event->registerItineraray($_POST);
 
-  //header('Location: ./travel_plan.php?travel_id=' . $_POST['travel_id']);
+  header('Location: ./travel_plan.php?travel_id=' . $_POST['travel_id']);
 ?>

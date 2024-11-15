@@ -22,12 +22,13 @@
 
     public function registerItineraray(array $post) {
       $sql = "INSERT INTO event 
-        (travel_id, route_id, is_transport, start_datetime, place, detail) values 
-        (:travel_id, :route_id, :is_transport, :start_datetime, :place, :detail)";
+        (travel_id, route_id, is_transport, transport_id, start_datetime, place, detail) values 
+        (:travel_id, :route_id, :is_transport, :transport_id, :start_datetime, :place, :detail)";
       $ps = $this->pdo->prepare($sql);
       $ps->bindValue(':travel_id', $post['travel_id']);
       $ps->bindValue(':route_id', $post['route_id']);
       $ps->bindValue(':is_transport', $post['is_transport']);
+      $ps->bindValue(':transport_id', $post['transport_id']);
       $ps->bindValue(':start_datetime', $post['start_datetime']);
       $ps->bindValue(':place', $post['place']);
       $ps->bindValue(':detail', $post['detail']);
