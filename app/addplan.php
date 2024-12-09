@@ -10,83 +10,179 @@
 </head>
 
 <body>
-    <!-- ボタン -->
-    <button id="openModal">予定を追加する</button>
+    <div class = "travel_name"><?php session_start(); $travel_name = $_SESSION['travel_name']; echo $travel_name;?></div>
+    <div class="container">
+    <div id="routes" class="row">
+    <?php
 
-    <!-- モーダルウィンドウ -->
-    <div id="modal" class="hidden">
-        <div id="modal-content">
-            <span id="closeModal">&times;</span>
-            <!-- モーダル内のタブUI -->
-            <div class="tab-container">
-                <div class="tab active" data-target="modal-tab1">移動</div>
-                <div class="tab" data-target="modal-tab2">予定</div>
-            </div>
-            <!-- タブ１の内容 -->
-            <div id="modal-tab1" class="tab-content active">
-                <div class="money">
-                    <h2>料金</h2>
-                    <input type="text" style="width:35%;" name="budget">円
+    try {
+        $travel_id = $_SESSION['travel_id'];
+        $pdo = new PDO('mysql:host=localhost;dbname=travelmates;charset=utf8', 'root', 'root');
+        $stmt = $pdo->prepare('SELECT * FROM event WHERE travel_id = ? ORDER BY route_id ASC');
+        $stmt->execute([$travel_id]);
+        $routes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                </div>
-                <hr>
-                <div class="place-time-container">
-                    <div class="place">
-                        <h2>出発地</h2>
-                        <input type="text" style="width:40%;" name="start">
-                    </div>
-                    <div class="time">
-                        <h2>出発時刻</h2>
-                        <input type="text" style="width:35%;" name="hour"> :
-                        <input type="text" style="width:35%;" name="minute">
-                    </div>
-                </div>
-                <div class="arrive-time-container">
-                    <div class="arrive-place">
-                        <h2>目的地</h2>
-                        <input type="text" style="width:40%;" name="end">
-                    </div>
-                    <div class="arrive-time">
-                        <h2>到着時刻</h2>
-                        <input type="text" style="width:35%;" name="hour"> :
-                        <input type="text" style="width:35%;" name="minute">
-                    </div>
-                </div>
-                <hr>
-                <div class="transportation">
-                    <h2>移動手段</h2>
-                    <select name='vehicle'>
-                        <option value='car'></option>
-                        <option value='car'>車</option>
-                        <option value='airplane'>飛行機</option>
-                        <option value='ferry'>フェリー</option>
-                    </select>
-                </div>
-            </div>
+        if ($routes) {
+            $lastRouteNumber = 0;
+            $route_set = 999;
+            $sumRouteCharge = 0;
 
-            <!-- タブ2の内容 -->
-            <div id="modal-tab2" class="tab-content">
-                <div class="addplace">
-                    <h2>場所を追加</h2>
-                    <input type="text" style="width:35%;" name="place">
+            foreach ($routes as $route) {
+                $route_db = $route['route_id'];
+                $place = $route['place'];
+                $event_detail = $route['event_detail'];
+                $start_datetime = $route['start_datetime'];
+                $end_datetime = $route['end_datetime'];
+                $form_check = isset($_POST['is_transport']) ? $_POST['is_transport'] : 0;
+                $start = $route['place'];
+                $end = $route['event_detail'];
+                $charge = $route['charge'];
+                // 日時を「時:分」形式に変換
+                $start_datetime = (new DateTime($start_datetime))->format('H:i');
+                $end_datetime = (new DateTime($end_datetime))->format('H:i');
+
+                // 新しいルートの場合は新しい<div>を作成
+                if ($route_db != $route_set) {
+                    if ($route_set != 999) {
+                        // 前のルートを閉じるとき、最後にボタンを追加して閉じる
+                        echo "<button id='{$lastRouteNumber}' class='openModalButton'>予定を追加する</button>";
+                        echo "<div class='sumRouteCharge'>合計金額: {$sumRouteCharge}円</div>";
+                        echo "</div>"; // ルート終了の閉じタグ
+                        $sumRouteCharge = 0;
+                    }
+
+                    $lastRouteNumber++;
+                    echo "<div class='col-12 route' data-route-number='{$lastRouteNumber}'>
+                            <div class='lastRouteNumber'><p>ルート{$lastRouteNumber}</p></div>";
+                }
+                $sumRouteCharge += $charge;
+                // データの内容に応じて表示する内容を切り替える
+                if ($form_check == 1) {
+                    echo "
+                        <div class='start'>{$start}</div>
+                        <div class='button'><button name='button'>編集</button></div>
+                        <div class='start_datetime'>{$start_datetime}発</div>
+                        <div class='end'>{$end}</div>
+                        <div class='end_datetime'>{$end_datetime}着</div>";
+                } else {
+                    echo "
+                        <div class='place'>{$place}</div>
+                        <div class='start_datetime'>{$start_datetime}着</div>";
+                }
+
+                // 現在のルート番号を次の比較用に保存
+                $route_set = $route_db;
+            }
+
+            // 最後のルートの閉じタグとボタンを追加
+            echo "<button id='{$lastRouteNumber}' class='openModalButton'>予定を追加する</button>
+                  <div class='sumRouteCharge'>合計金額: {$sumRouteCharge}円</div>
+            ";
+            echo "</div>"; // 最後のルートを閉じる
+        } else {
+            echo "<p>登録されているルートはありません。</p>";
+        }
+    } catch (PDOException $e) {
+        echo 'データベースエラー: ' . $e->getMessage();
+    }
+    ?>
+    <script>
+        // PHPの変数をJavaScriptに渡す
+        window.lastRouteNumber = <?php echo $lastRouteNumber; ?>;
+    </script>
+</div>
+
+
+        <button id="addRouteButton" class="btn btn-primary mt-3">新しいルートを追加する</button>
+
+        <!-- モーダル -->
+        <div id="modal" class="hidden">
+            <div id="modal-content">
+                <span id="closeModal">&times;</span>
+
+                <div class="tab-container">
+                    <div class="tab active" data-target="modal-tab1">移動</div>
+                    <div class="tab" data-target="modal-tab2">予定</div>
                 </div>
-                <hr>
-                <div class="addtime">
-                    <h2>時刻</h2>
-                    <input type="text" style="width:25%;" name="time"> :
-                    <input type="text" style="width:25%;" name="time">
-                </div>
-                <hr>
-                <div class="addplans">
-                    <h2>予定</h2>
-                    <textarea name="plans" cols="25" rows="3"></textarea>
-                </div>
+
+                <!-- タブ1：移動 -->
+                <form id="scheduleForm1" action="addplan_db.php" method="POST">
+                    <input type="hidden" name="last_route_number" value="<?php echo $lastRouteNumber; ?>">
+                    <!--ルートナンバーをjavascriptからpostで受け取る-->
+                    <input type="hidden" id="routeNumberInput1" name="routeNumber" value="">
+                    <div id="modal-tab1" class="tab-content active">
+                        <div class="form-group">
+                            <label for="budget">料金</label>
+                            <input type="text" class="form-control" name="budget" placeholder="円">
+                        </div>
+                        <div class="form-group">
+                            <label>出発地</label>
+                            <input type="text" class="form-control" name="start">
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <label>出発時刻</label>
+                                <input type="text" class="form-control" name="start_hour" placeholder="時">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" name="start_minute" placeholder="分">
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label>目的地</label>
+                            <input type="text" class="form-control" name="end">
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <label>到着時刻</label>
+                                <input type="text" class="form-control" name="end_hour" placeholder="時">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" name="end_minute" placeholder="分">
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label>移動手段</label>
+                            <select class="form-control" name="vehicle" required>
+                                <option value="" disabled selected>選択してください</option>
+                                <option value="1">車</option>
+                                <option value="2">飛行機</option>
+                                <option value="3">フェリー</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success mt-3">スケジュールを追加</button>
+                    </div>
+                </form>
+
+                <!-- タブ2：予定 -->
+                <form id="scheduleForm2" action="addplan_db.php" method="POST">
+                    <input type="hidden" name="last_route_number" value="<?php echo $lastRouteNumber; ?>">
+                    <input type="hidden" id="routeNumberInput2" name="routeNumber" value="">
+                    <div id="modal-tab2" class="tab-content">
+                        <div class="form-group">
+                            <label>場所を追加</label>
+                            <input type="text" class="form-control" name="place">
+                        </div>
+                        <div class="form-group mt-3">
+                            <label>詳細内容</label>
+                            <input type="text" class="form-control" name="plan_detil">
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <label>到着時刻</label>
+                                <input type="text" class="form-control" name="plan_hour" placeholder="時">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" name="plan_minute" placeholder="分">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success mt-3">スケジュールを追加</button>
+                    </div>
+                </form>
             </div>
-            <button class="submit" type="button">スケジュールを追加</button>
         </div>
     </div>
 
     <script src="../app/scripts/addplan.js"></script>
 </body>
-
 </html>
