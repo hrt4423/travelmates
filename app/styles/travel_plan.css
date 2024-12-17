@@ -1,0 +1,240 @@
+/* モーダルの基本スタイル */
+#modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+/* モーダルコンテンツのスタイル */
+#modal-content {
+    background-color: #fefefe;
+    margin: 3% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    height: 90%;
+}
+
+/* 閉じるボタンのスタイル */
+#closeModal {
+    color: #aaa;
+    float: right;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#closeModal:hover,
+#closeModal:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* モーダルの表示状態 */
+.show {
+    display: block;
+}
+
+/* モーダルの非表示状態 */
+.hidden {
+    display: none;
+}
+
+/* タブのスタイル */
+.tab-container {
+    display: flex;
+    justify-content: center; 
+    border-bottom: 1px solid #0b0b0b;
+    cursor: pointer;
+    
+}
+
+.tab {
+    padding: 10px 20px;
+    border: 1px solid #0b0b0b;
+    border-bottom: none;
+    background-color: #f1f1f1;
+    transition: background-color 0.3s ease;
+}
+
+.tab:hover {
+    background-color: #e1e1e1;
+}
+
+.tab.active {
+    background-color: #fff;
+    border-top: 2px solid #007BFF;
+    border-left: 2px solid #007BFF;
+    border-right: 2px solid #007BFF;
+    border-bottom: 2px solid #fff;
+}
+
+/* タブコンテンツのスタイル */
+.tab-content {
+    display: none;
+    padding: 20px;
+    border-top: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+#modal-tab-transport{
+    border: 1px solid #0b0b0b;
+}
+/*料金入力のスタイル*/
+.charge{
+    text-align: center;
+}
+.charge h2{
+    font-size: 20px;
+    margin-top: 7px;
+    margin-bottom: 5px;
+}
+/*場所のスタイル*/
+.place h2{
+    font-size: 15px;
+    margin-left: 50px;
+    margin-bottom: 5px;
+}
+/*テキストボックスのスタイル*/
+#modal-tab-transport .place input {
+    margin-left: 35px;
+}
+/*要素を隣にする*/
+#modal-tab-transport .place-time-container {
+    display: flex;
+    gap: 20px; /* 隣接する要素間のスペースを設定（必要に応じて調整） */
+}
+
+#modal-tab-transport .place, 
+#modal-tab-transport .time {
+    flex: 1;
+}
+/*時間のスタイル*/
+.time h2{
+    font-size: 15px;
+    margin-left: 40px;
+    margin-bottom: 5px;
+}
+#modal-tab-transport .arrive-time-container {
+    display: flex;
+    gap: 20px; /* 隣接する要素間のスペースを設定（必要に応じて調整） */
+}
+/*到着時間*/
+#modal-tab-transport .arrive-place, 
+#modal-tab-transport .arrive-time {
+    flex: 1;
+}
+#modal-tab-transport .arrive-place input {
+    margin-left: 35px;
+}
+.arrive-place h2{
+    font-size: 15px;
+    margin-left: 45px;
+    margin-bottom: 5px;
+}
+.arrive-time h2{
+    font-size: 15px;
+    margin-left: 40px;
+    margin-bottom: 5px;
+}
+/*移動方法*/
+.transportation{
+    text-align: center;
+}
+.transportation h2{
+    font-size: 20px;
+}
+.transportation select{
+    width: 40%;
+    text-align: center;
+}
+/*ボタン*/
+button.submit {
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 5px; /* 角を丸くする */
+    font-size: 16px; /* フォントサイズを16pxに設定 */
+}
+/*タブ２*/
+#modal-tab-schedule{
+    border: 1px solid #0b0b0b;
+}
+.addplace{
+    text-align: center;
+}
+.addplace h2{
+    font-size: 20px;
+    margin-top: 7px;
+    margin-bottom: 5px;
+}
+.addtime h2{
+    font-size: 20px;
+}
+.addtime{
+    text-align: center;
+}
+.addplans h2{
+    font-size: 20px;
+}
+.addplans{
+    text-align: center;
+}
+input{
+    text-align: center;    
+}
+/* 横スクロールを有効化するための設定 */
+#routes {
+    display: flex;
+    flex-wrap: nowrap;  /* 子要素を1行に並べる */
+    overflow-x: auto;  /* 横スクロールを有効化 */
+    overflow-y: hidden;  /* 縦スクロールを無効化 */
+    white-space: nowrap;
+    height: 100%;  /* コンテナ全体の高さを使用 */
+    padding-bottom: 10px;  /* スクロールバー分の余白 */
+}
+
+/* 各ルートカードのスタイル */
+.route {
+    flex: 0 0 auto;  /* 横並びにするための設定 */
+    width: 300px;
+    margin: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    scroll-snap-align: center;  /* スクロール時に中央に揃える */
+}
+
+/* 親コンテナの高さ調整 */
+.container {
+    height: 100vh;  /* ビューポート全体の高さを使用 */
+    /*overflow: hidden;  /* 縦方向のスクロールを無効化 */
+    display: flex;
+    flex-direction: column;
+}
+
+/* スクロールバーの見た目をカスタマイズ */
+#routes::-webkit-scrollbar {
+    height: 8px;  /* 横スクロールバーの高さ */
+}
+
+#routes::-webkit-scrollbar-thumb {
+    background-color: #bbb;  /* スクロールバーの色 */
+    border-radius: 4px;
+}
+
+.event-list {
+    height: 500px;
+    overflow:scroll;
+}
+
+

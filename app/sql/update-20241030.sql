@@ -1,0 +1,1 @@
+INSERT INTO 'transport' ('transport_id', 'name') VALUES ((1, 'なし'));

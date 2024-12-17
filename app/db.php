@@ -5,7 +5,7 @@
 
     $dsn = 'mysql:host=localhost;dbname=travelmates;charset=utf8';
     $username = 'root';
-    $password = '';
+    $password = 'root';
 
     try {
         $pdo = new PDO($dsn, $username, $password, $opt);

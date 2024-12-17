@@ -3,7 +3,10 @@
     session_start();
 
     // データベース接続
-    require_once 'db.php';
+    require_once ('dao/Connection.php');
+    $connection = new Connection();
+    $pdo = $connection->getPdo();
+
 
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = $_POST['email'];
@@ -32,7 +35,7 @@
             $_SESSION['user_id'] = $user['user_id'];
 
             // ログイン後のページへリダイレクト
-            header('Location: ./home.html');
+            header('Location: ./home.php');
             exit;
         } else {
             $error = "メールアドレスまたは、パスワードが間違っています。";

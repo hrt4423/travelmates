@@ -7,6 +7,8 @@
       $connect = new Connection();
       $this->pdo = $connect->getPdo();
     }
+    
+    //名前を変更したい
     public function getTravelTitle($travel_id) {
         $sql = "SELECT title FROM travel";
         $ps = $this->pdo->prepare($sql);
@@ -19,5 +21,19 @@
       $ps = $this->pdo->prepare($sql);
       $ps->execute();
     }
+
+    public function findTravelByTravelId($travel_id) {
+      $sql = "SELECT * FROM travel WHERE travel_id = :travel_id";
+      $ps = $this->pdo->prepare($sql);
+      $ps->bindValue(':travel_id', $travel_id);
+      try {
+        $ps->execute();
+        return $ps->fetch(PDO::FETCH_ASSOC);
+      } catch (Exception $e) {
+        $e->getMessage();
+      }
+    }
+
   }
+
 ?>
