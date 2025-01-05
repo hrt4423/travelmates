@@ -3,6 +3,7 @@
   if(empty($_SESSION['user_id'])) {
     header("location: ./user_register.php");
   }
+  $_SESSION['image_path'] = 'hoge.jpg';
 ?>
 
 <!DOCTYPE html>
