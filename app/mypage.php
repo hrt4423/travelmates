@@ -112,20 +112,7 @@ try {
             <div>メールアドレス: <span id="email"><?= htmlspecialchars($user_info['email'] ?? '未設定') ?></span></div>
         </div>
         <div class="section" id="schedule">
-            <div>予定一覧</div>
-            <ul>
-                <?php if (!empty($travel_list)): ?>
-                    <?php foreach ($travel_list as $travel): ?>
-                        <li>
-                            <div>
-                                <strong><?= htmlspecialchars($travel['title']) ?></strong><br>
-                            </div>
-                        </li>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <li>予定はありません。</li>
-                <?php endif; ?>
-            </ul>
+            <div><a href="./my_travel.php">予定一覧を見る</a></div>
         </div>
         <div class="section" id="edit-info">
             <div><a href="./change_reg.php">登録内容変更</a></div>
