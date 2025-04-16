@@ -28,6 +28,7 @@
             $sumRouteCharge = 0;
 
             foreach ($routes as $route) {
+                $event_id = $route['event_id'];
                 $route_db = $route['route_id'];
                 $place = $route['place'];
                 $event_detail = $route['event_detail'];
@@ -63,11 +64,14 @@
                         <div class='button'><button name='button'>編集</button></div>
                         <div class='start_datetime'>{$start_datetime}発</div>
                         <div class='end'>{$end}</div>
-                        <div class='end_datetime'>{$end_datetime}着</div>";
+                        <div class='end_datetime'>{$end_datetime}着</div>
+                        <div class='editButton'><button class='editButton' data-event-id='{$event_id}' data-route-number='{$lastRouteNumber}'>編集</button></div>"
+                        ;
                 } else {
                     echo "
                         <div class='place'>{$place}</div>
-                        <div class='start_datetime'>{$start_datetime}着</div>";
+                        <div class='start_datetime'>{$start_datetime}着</div>
+                        <div class='editButton'><button class='editButton' data-event-id='{$event_id}' data-route-number='{$lastRouteNumber}'>編集</button></div>";
                 }
 
                 // 現在のルート番号を次の比較用に保存
@@ -107,6 +111,8 @@
 
                 <!-- タブ1：移動 -->
                 <form id="scheduleForm1" action="addplan_db.php" method="POST">
+                    <!-- モーダルのフォーム内 -->
+                    <input type="hidden" name="event_id1" value="">
                     <input type="hidden" name="last_route_number" value="<?php echo $lastRouteNumber; ?>">
                     <!--ルートナンバーをjavascriptからpostで受け取る-->
                     <input type="hidden" id="routeNumberInput1" name="routeNumber" value="">
@@ -156,6 +162,8 @@
 
                 <!-- タブ2：予定 -->
                 <form id="scheduleForm2" action="addplan_db.php" method="POST">
+                    <!-- モーダルのフォーム内 -->
+                    <input type="hidden" name="event_id2" value="">
                     <input type="hidden" name="last_route_number" value="<?php echo $lastRouteNumber; ?>">
                     <input type="hidden" id="routeNumberInput2" name="routeNumber" value="">
                     <div id="modal-tab2" class="tab-content">
